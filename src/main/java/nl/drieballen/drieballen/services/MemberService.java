@@ -5,7 +5,6 @@ import nl.drieballen.drieballen.dtos.MemberInputDto;
 import nl.drieballen.drieballen.exceptions.UsernameNotFoundException;
 import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.repositories.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.Optional;
 @Service
 public class MemberService {
 
-    @Autowired
     private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {

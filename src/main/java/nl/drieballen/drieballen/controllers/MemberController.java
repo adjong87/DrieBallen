@@ -2,7 +2,6 @@ package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.dtos.MemberDto;
 import nl.drieballen.drieballen.dtos.MemberInputDto;
-
 import nl.drieballen.drieballen.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/members")
 public class MemberController {
@@ -40,9 +38,11 @@ public class MemberController {
         return memberService.addMember(memberInputDto);
     }
 
+
+
     @DeleteMapping(value = "/{username}")
-    public ResponseEntity<Object> deleteMember(@PathVariable("username") String username) {
+    public String deleteMember(@PathVariable("username") String username) {
         memberService.deleteMember(username);
-        return ResponseEntity.noContent().build();
+        return "Gebruiker " + username + " is verwijderd";
     }
 }

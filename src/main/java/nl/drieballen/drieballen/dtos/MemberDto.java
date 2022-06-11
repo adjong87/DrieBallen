@@ -1,9 +1,10 @@
 package nl.drieballen.drieballen.dtos;
 
+import java.time.LocalDateTime;
+
 public class MemberDto {
 
     private String username;
-
     private int doB;
 
     private String firstName;
@@ -11,11 +12,13 @@ public class MemberDto {
     private String lastName;
 
     private int aimScore;
+    private LocalDateTime gameStartedAt;
 
     // ----- GETTERS ------------
 
+
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public String getFirstName() {
@@ -34,7 +37,13 @@ public class MemberDto {
         return aimScore;
     }
 
+    public LocalDateTime gameStartedAt() {
+        return gameStartedAt;
+    }
+
+
     // ----- SETTERS ------------
+
 
     public void setUsername(String username) {
         this.username = username;

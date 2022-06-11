@@ -1,19 +1,19 @@
 package nl.drieballen.drieballen.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "Members")
+@Table(name = "Leden")
 public class Member {
 
     @Id
-    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 255)
     private String password;
 
     private int doB;
@@ -30,20 +30,9 @@ public class Member {
 
     private int aimScore;
 
-    public Member() {
-    }
-
-    public Member(String username, String password, int doB, String firstName, String lastName, String email, int age, char gender, int aimScore) {
-        this.username = username;
-        this.password = password;
-        this.doB = doB;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-        this.gender = gender;
-        this.aimScore = aimScore;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private Collection<PlayedGame> playedGames;
 
     // ----- GETTERS ------------
 
@@ -84,7 +73,12 @@ public class Member {
         return aimScore;
     }
 
+    public Collection<PlayedGame> getPlayedGames() {
+        return playedGames;
+    }
+
     // ----- SETTERS ------------
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -120,5 +114,9 @@ public class Member {
 
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+
+    public void setPlayedGames(Collection<PlayedGame> playedGames) {
+        this.playedGames = playedGames;
     }
 }

@@ -3,7 +3,6 @@ package nl.drieballen.drieballen.dtos;
 public class MemberInputDto {
 
     private String username;
-
     private String password;
 
     private int doB;
@@ -59,6 +58,7 @@ public class MemberInputDto {
     }
 
     // ----- SETTERS ------------
+
 
     public void setUsername(String username) {
         this.username = username;
