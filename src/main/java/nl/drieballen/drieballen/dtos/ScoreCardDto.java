@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class ScoreCardDto {
 
+    private Long Id;
     private int[] playerOneScore;
 
     private int[] playerTwoScore;
@@ -23,6 +24,11 @@ public class ScoreCardDto {
 
     // ------ GETTERS
 
+
+    public Long getId() {
+        return Id;
+    }
+
     public int[] getPlayerOneScore() {
         return playerOneScore;
     }
@@ -37,6 +43,11 @@ public class ScoreCardDto {
 
 
     // ------ SETTERS
+
+
+    public void setId(Long id) {
+        Id = id;
+    }
 
     public void setPlayerOneScore(int[] playerOneScore) {
         this.playerOneScore = playerOneScore;

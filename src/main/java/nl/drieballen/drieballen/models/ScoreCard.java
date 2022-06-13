@@ -17,8 +17,6 @@ public class ScoreCard {
 
     private int[] playerTwoScore;
 
-    private String billiard;
-
     private int nrOfTurns;
 
     private LocalDateTime gespeeldOp;
@@ -38,10 +36,6 @@ public class ScoreCard {
 
     public int[] getPlayerTwoScore() {
         return playerTwoScore;
-    }
-
-    public String getBilliard() {
-        return billiard;
     }
 
     public int getNrOfTurns() {
@@ -69,10 +63,6 @@ public class ScoreCard {
 
     public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
-    }
-
-    public void setBilliard(String billiard) {
-        this.billiard = billiard;
     }
 
     public void setNrOfTurns(int nrOfTurns) {
