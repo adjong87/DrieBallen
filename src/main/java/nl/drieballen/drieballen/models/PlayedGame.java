@@ -1,6 +1,8 @@
 package nl.drieballen.drieballen.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
@@ -58,15 +60,10 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
-    public void checkUitgespeeld() {
-        int toGetScore = member.getAimScore();
-        int totalPoints = 0;
-        for (int i = 0; i < scoreCard.getPlayerOneScore().length; i++) {
-            totalPoints += scoreCard.getPlayerOneScore()[i];
+    public boolean setUitgespeeld() {
+        if (Arrays.stream(scoreCard.getPlayerOneScore()).count() >= member.getAimScore()) {
+            return true;
         }
-        if (toGetScore <= totalPoints){
-            uitgespeeld = true;
-        } else { uitgespeeld = false;
-        }
+        else return false;
     }
 }

@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.dtos;
 
-import java.time.LocalDateTime;
-
 public class ScoreCardDto {
 
     private Long Id;
@@ -23,7 +21,6 @@ public class ScoreCardDto {
     }
 
     // ------ GETTERS
-
 
     public Long getId() {
         return Id;
