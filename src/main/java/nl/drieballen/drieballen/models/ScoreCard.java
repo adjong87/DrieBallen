@@ -66,7 +66,7 @@ public class ScoreCard {
     }
 
     public void setNrOfTurns(int nrOfTurns) {
-        this.nrOfTurns = nrOfTurns;
+        this.nrOfTurns = playerOneScore.length;
     }
 
     public void setGespeeldOp(LocalDateTime gespeeldOp) {
@@ -75,5 +75,9 @@ public class ScoreCard {
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {
         this.playedGames = playedGames;
+    }
+
+    public void addPlayedGame(PlayedGame playedGame){
+        playedGames.add(playedGame);
     }
 }
