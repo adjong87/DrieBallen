@@ -32,9 +32,4 @@ public class ScoreCardController {
         return scoreCardDto;
     }
 
-    @PostMapping("/{playerOne}/{playerTwo}/{scoreCardId}")
-    public void matchMemberToScoreCard(@PathVariable("playerOne") String playerOne, @PathVariable("playerTwo") String playerTwo, @PathVariable("scoreCardId") Long scoreCardId){
-        scoreCardService.matchMemberToScoreCard(playerOne, playerTwo, scoreCardId);
-    }
-
 }
