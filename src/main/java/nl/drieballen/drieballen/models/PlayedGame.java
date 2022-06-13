@@ -1,9 +1,6 @@
 package nl.drieballen.drieballen.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
@@ -12,13 +9,11 @@ public class PlayedGame {
     PlayedGameId id;
 
     @ManyToOne
-    @JsonIgnore
     @MapsId("memberUsername")
     @JoinColumn(name = "member_username")
     Member member;
 
     @ManyToOne
-    @JsonIgnore
     @MapsId(value = "scoreCardId")
     @JoinColumn(name = "scorecard_id")
     ScoreCard scoreCard;
@@ -26,6 +21,13 @@ public class PlayedGame {
     boolean uitgespeeld;
 
     public PlayedGame() {
+    }
+
+    public PlayedGame(PlayedGameId id, Member member, ScoreCard scoreCard, boolean uitgespeeld) {
+        this.id = id;
+        this.member = member;
+        this.scoreCard = scoreCard;
+        this.uitgespeeld = uitgespeeld;
     }
 
     public PlayedGameId getId() {
@@ -56,7 +58,15 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
-    public void setUitgespeeld(boolean uitgespeeld) {
-        this.uitgespeeld = uitgespeeld;
+    public void checkUitgespeeld() {
+        int toGetScore = member.getAimScore();
+        int totalPoints = 0;
+        for (int i = 0; i < scoreCard.getPlayerOneScore().length; i++) {
+            totalPoints += scoreCard.getPlayerOneScore()[i];
+        }
+        if (toGetScore <= totalPoints){
+            uitgespeeld = true;
+        } else { uitgespeeld = false;
+        }
     }
 }
