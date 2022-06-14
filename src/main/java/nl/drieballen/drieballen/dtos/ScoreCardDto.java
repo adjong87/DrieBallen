@@ -1,5 +1,8 @@
 package nl.drieballen.drieballen.dtos;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class ScoreCardDto {
 
     private Long Id;
@@ -13,6 +16,9 @@ public class ScoreCardDto {
     private int[] playerTwoScore;
 
     private int nrOfTurns;
+
+    private Calendar gespeeldOp;
+
 
     // ------ CONSTRUCTORS
 
@@ -45,6 +51,9 @@ public class ScoreCardDto {
         return nrOfTurns;
     }
 
+    public Calendar getGespeeldOp() {
+        return gespeeldOp;
+    }
 
     // ------ SETTERS
 
@@ -73,4 +82,7 @@ public class ScoreCardDto {
         this.nrOfTurns = nrOfTurns;
     }
 
+    public void setGespeeldOp(Calendar gespeeldOp) {
+        this.gespeeldOp = gespeeldOp;
+    }
 }

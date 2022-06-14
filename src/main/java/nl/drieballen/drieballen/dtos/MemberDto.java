@@ -1,6 +1,5 @@
 package nl.drieballen.drieballen.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.drieballen.drieballen.models.PlayedGame;
 
 import java.time.LocalDateTime;

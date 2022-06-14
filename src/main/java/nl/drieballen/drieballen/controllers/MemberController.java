@@ -20,15 +20,15 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<MemberDto>> getAllMembers(){
         List<MemberDto>memberDtoList;
         memberDtoList = memberService.getAllMembers();
         return ResponseEntity.ok().body(memberDtoList);
     }
 
-    @GetMapping(value = "/{username}")
-    public ResponseEntity<MemberDto> getMember(@PathVariable("username") String username) {
+    @GetMapping(value = "/profile")
+    public ResponseEntity<MemberDto> getMember(@RequestParam("username") String username) {
         MemberDto optionalMember = memberService.getMember(username);
         return ResponseEntity.ok().body(optionalMember);
     }
@@ -37,8 +37,6 @@ public class MemberController {
     public MemberDto addMember(@RequestBody MemberInputDto memberInputDto){
         return memberService.addMember(memberInputDto);
     }
-
-
 
     @DeleteMapping(value = "/{username}")
     public String deleteMember(@PathVariable("username") String username) {

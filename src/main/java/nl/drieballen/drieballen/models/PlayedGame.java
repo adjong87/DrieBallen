@@ -3,7 +3,6 @@ package nl.drieballen.drieballen.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
@@ -18,7 +17,6 @@ public class PlayedGame {
     Member member;
 
     @ManyToOne
-    @JsonIgnore
     @MapsId(value = "scoreCardId")
     @JoinColumn(name = "scorecard_id")
     ScoreCard scoreCard;

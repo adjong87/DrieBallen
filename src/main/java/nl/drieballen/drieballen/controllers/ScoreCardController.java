@@ -27,20 +27,19 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
-    @PostMapping("/create")
-    public ScoreCardDto createScoreCard(@RequestBody ScoreCardInputDto ScoreCardInputDto) {
-        ScoreCardDto scoreCardDto= scoreCardService.createScoreCard(ScoreCardInputDto);
-        return scoreCardDto;
-    }
-
-    @PutMapping("/update/{id}")
-    public ScoreCardDto updateScoreCard(@PathVariable("id") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
-        ScoreCardDto dto = scoreCardService.updateScoreCard(id, scoreCardInputDto);
+    @PutMapping("/correct")
+    public ScoreCardDto correctScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
+        ScoreCardDto dto = scoreCardService.correctScore(id, scoreCardInputDto);
         return dto;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteScoreCard(@PathVariable("id") Long id){
+    @PutMapping("/fill")
+    public ScoreCardDto fillInScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
+        return scoreCardService.fillInScore(id, scoreCardInputDto);
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteScoreCard(@RequestParam(value = "id") Long id){
         scoreCardService.deleteScoreCard(id);
         return "Scorecard " + id + " is verwijderd";
     }
