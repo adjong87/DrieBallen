@@ -68,6 +68,8 @@ public class ScoreCardService {
     public static ScoreCardDto fromScoreCard(ScoreCard scoreCard) {
         var dto = new ScoreCardDto();
         dto.setId(scoreCard.getId());
+        dto.setPlayerOneName(scoreCard.getPlayerOneName());
+        dto.setPlayerTwoName(scoreCard.getPlayerTwoName());
         dto.setPlayerOneScore(scoreCard.getPlayerOneScore());
         dto.setPlayerTwoScore(scoreCard.getPlayerTwoScore());
         dto.setNrOfTurns(scoreCard.getNrOfTurns());
