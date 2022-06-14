@@ -1,7 +1,6 @@
 package nl.drieballen.drieballen.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class PlayedGame {
@@ -59,7 +58,15 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
-    public void setUitgespeeld(boolean uitgespeeld) {
-        this.uitgespeeld = uitgespeeld;
+    public void checkUitgespeeld() {
+        int toGetScore = member.getAimScore();
+        int totalPoints = 0;
+        for (int i = 0; i < scoreCard.getPlayerOneScore().length; i++) {
+            totalPoints += scoreCard.getPlayerOneScore()[i];
+        }
+        if (toGetScore <= totalPoints){
+            uitgespeeld = true;
+        } else { uitgespeeld = false;
+        }
     }
 }
