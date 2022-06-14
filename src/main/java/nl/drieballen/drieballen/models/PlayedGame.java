@@ -1,7 +1,6 @@
 package nl.drieballen.drieballen.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Entity
@@ -23,13 +22,6 @@ public class PlayedGame {
     boolean uitgespeeld;
 
     public PlayedGame() {
-    }
-
-    public PlayedGame(PlayedGameId id, Member member, ScoreCard scoreCard, boolean uitgespeeld) {
-        this.id = id;
-        this.member = member;
-        this.scoreCard = scoreCard;
-        this.uitgespeeld = uitgespeeld;
     }
 
     public PlayedGameId getId() {
