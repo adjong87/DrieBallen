@@ -1,0 +1,4 @@
+INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('GBies', 'password', 18021958, 'Geeske', 'Bies', 'g.bies@fryslan.nl', 64, 'v', 44);
+INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('adjong87', 'password', 21031987, 'Arjen', 'de Jong', 'adjong87@gmail.com', 35, 'm', 27);
+INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('kslabikova', 'password', 27101993, 'Kristina', 'Slabikova', 'kristina.slabikova@gmail.com', 28, 'v', 15);
+INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('hermand', 'wachtwoord', 12121940, 'Herman', 'Driessen', 'h.driessen@gmail.com', 82, 'm', 34);

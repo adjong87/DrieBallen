@@ -5,7 +5,7 @@ import nl.drieballen.drieballen.services.PlayedGameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
+
 import java.util.List;
 
 @RestController
@@ -19,15 +19,20 @@ public class PlayedGameController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PlayedGame>> getAllPlayedGames(){
+    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
         List<PlayedGame> playedGameList;
         playedGameList = playedGameService.getAllPlayedGames();
         return ResponseEntity.ok().body(playedGameList);
     }
 
-    @PostMapping("/{playerOne}/{playerTwo}/{scoreCardId}")
-    public void matchMemberToScoreCard(@PathVariable("playerOne") String playerOne, @PathVariable("playerTwo") String playerTwo, @PathVariable("scoreCardId") Long scoreCardId){
-        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, scoreCardId);
+    @PostMapping("/playedgame")
+    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo, @RequestParam(value = "scoreCard") Long id) {
+        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, id);
     }
+
+    //    @PostMapping("/{playerOne}/{playerTwo}/{scoreCardId}")
+//    public void matchMemberToScoreCard(@PathVariable("playerOne") String playerOne, @PathVariable("playerTwo") String playerTwo, @PathVariable("scoreCardId") Long scoreCardId){
+//        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, scoreCardId);
+//    }
 
 }

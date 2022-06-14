@@ -1,6 +1,10 @@
 package nl.drieballen.drieballen.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.drieballen.drieballen.models.PlayedGame;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 public class MemberDto {
 
@@ -12,6 +16,8 @@ public class MemberDto {
     private String lastName;
 
     private int aimScore;
+
+    private Collection<PlayedGame> playedGames;
     private LocalDateTime gameStartedAt;
 
     // ----- GETTERS ------------
@@ -35,6 +41,10 @@ public class MemberDto {
 
     public int getAimScore() {
         return aimScore;
+    }
+
+    public Collection<PlayedGame> getPlayedGames() {
+        return playedGames;
     }
 
     public LocalDateTime gameStartedAt() {
@@ -64,6 +74,11 @@ public class MemberDto {
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
     }
+
+    public void setPlayedGames(Collection<PlayedGame> playedGames) {
+        this.playedGames = playedGames;
+    }
 }
+
 
 

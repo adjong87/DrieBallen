@@ -67,6 +67,7 @@ public class MemberService {
         dto.setFirstName(member.getFirstName());
         dto.setLastName(member.getLastName());
         dto.setAimScore(member.getAimScore());
+        dto.setPlayedGames(member.getPlayedGames());
         return dto;
     }
 

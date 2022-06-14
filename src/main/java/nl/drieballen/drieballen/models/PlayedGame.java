@@ -1,5 +1,7 @@
 package nl.drieballen.drieballen.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
@@ -10,11 +12,13 @@ public class PlayedGame {
     PlayedGameId id;
 
     @ManyToOne
+    @JsonIgnore
     @MapsId("memberUsername")
     @JoinColumn(name = "member_username")
     Member member;
 
     @ManyToOne
+    @JsonIgnore
     @MapsId(value = "scoreCardId")
     @JoinColumn(name = "scorecard_id")
     ScoreCard scoreCard;
