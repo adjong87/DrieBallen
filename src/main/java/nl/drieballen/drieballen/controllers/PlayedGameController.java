@@ -18,10 +18,17 @@ public class PlayedGameController {
         this.playedGameService = playedGameService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
+//    @GetMapping("/")
+//    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
+//        List<PlayedGame> playedGameList;
+//        playedGameList = playedGameService.getAllPlayedGames();
+//        return ResponseEntity.ok().body(playedGameList);
+//    }
+
+    @GetMapping("/find")
+    public ResponseEntity<List<PlayedGame>> getAllPlayedGamesByFirstName(@RequestParam(value = "username") String username){
         List<PlayedGame> playedGameList;
-        playedGameList = playedGameService.getAllPlayedGames();
+        playedGameList = playedGameService.findPlayedGameById(username);
         return ResponseEntity.ok().body(playedGameList);
     }
 

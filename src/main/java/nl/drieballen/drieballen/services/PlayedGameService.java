@@ -27,9 +27,14 @@ public class PlayedGameService {
         this.playedGameRepository = playedGameRepository;
     }
 
-    public List<PlayedGame> getAllPlayedGames(){
-        List<PlayedGame> playedGameList = playedGameRepository.findAll();
-        return playedGameList;
+//    public List<PlayedGame> getAllPlayedGames(){
+//        List<PlayedGame> playedGameList = playedGameRepository.findAll();
+//        return playedGameList;
+//    }
+
+    public List<PlayedGame> findPlayedGameById(String username){
+        List<PlayedGame> playedGamesList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCase(username);
+        return playedGamesList;
     }
 
     public void createPlayedGame(String playerOne, String playerTwo){
