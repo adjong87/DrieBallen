@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.services;
 
+import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.PlayedGame;
 import nl.drieballen.drieballen.models.PlayedGameId;
@@ -32,19 +33,14 @@ public class PlayedGameService {
     }
 
     public void createPlayedGame(String playerOne, String playerTwo){
-        Member p1 = memberRepository.findById(playerOne).orElse(null);
-        Member p2 = memberRepository.findById(playerTwo).orElse(null);
-        assert p1 != null;
-        assert p2 != null;
+        Member p1 = memberRepository.findById(playerOne).orElseThrow(() -> new RecordNotFoundException("username " + playerOne + " doesn't exist"));
+        Member p2 = memberRepository.findById(playerTwo).orElseThrow(() -> new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
         ScoreCard sC = new ScoreCard(p1.getFirstName(), p2.getFirstName());
         scoreCardRepository.save(sC);
-        PlayedGameId id1 = new PlayedGameId(playerOne, sC.getId());
-        PlayedGameId id2 = new PlayedGameId(playerTwo, sC.getId());
-        PlayedGame pg1 = new PlayedGame(id1, p1, sC);
-        PlayedGame pg2 = new PlayedGame(id2, p2, sC);
+        PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
+        PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);
         playedGameRepository.save(pg1);
         playedGameRepository.save(pg2);
-
     }
 
 //    public void matchMemberToScoreCard(String playerOne, String playerTwo, Long scoreCardId){
