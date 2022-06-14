@@ -27,7 +27,7 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ScoreCardDto createScoreCard(@RequestBody ScoreCardInputDto ScoreCardInputDto) {
         ScoreCardDto scoreCardDto= scoreCardService.createScoreCard(ScoreCardInputDto);
         return scoreCardDto;
