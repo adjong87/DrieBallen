@@ -11,12 +11,6 @@ public class ScoreCardDto {
 
     // ------ CONSTRUCTORS
 
-    public ScoreCardDto(int[] playerOneScore, int[] playerTwoScore, int nrOfTurns) {
-        this.playerOneScore = playerOneScore;
-        this.playerTwoScore = playerTwoScore;
-        this.nrOfTurns = nrOfTurns;
-    }
-
     public ScoreCardDto() {
     }
 

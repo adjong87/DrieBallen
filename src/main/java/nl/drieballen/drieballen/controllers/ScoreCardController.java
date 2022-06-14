@@ -2,7 +2,6 @@ package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
-import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.services.ScoreCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
