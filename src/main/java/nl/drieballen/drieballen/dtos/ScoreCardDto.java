@@ -4,6 +4,10 @@ public class ScoreCardDto {
 
     private Long Id;
 
+    private String playerOneName;
+
+    private String playerTwoName;
+
     private int[] playerOneScore;
 
     private int[] playerTwoScore;
@@ -19,6 +23,14 @@ public class ScoreCardDto {
 
     public Long getId() {
         return Id;
+    }
+
+    public String getPlayerOneName() {
+        return playerOneName;
+    }
+
+    public String getPlayerTwoName() {
+        return playerTwoName;
     }
 
     public int[] getPlayerOneScore() {
@@ -39,6 +51,14 @@ public class ScoreCardDto {
 
     public void setId(Long id) {
         Id = id;
+    }
+
+    public void setPlayerOneName(String playerOneName) {
+        this.playerOneName = playerOneName;
+    }
+
+    public void setPlayerTwoName(String playerTwoName) {
+        this.playerTwoName = playerTwoName;
     }
 
     public void setPlayerOneScore(int[] playerOneScore) {

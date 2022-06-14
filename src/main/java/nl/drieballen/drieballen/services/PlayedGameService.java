@@ -1,6 +1,5 @@
 package nl.drieballen.drieballen.services;
 
-import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.PlayedGame;
 import nl.drieballen.drieballen.models.PlayedGameId;
@@ -11,7 +10,6 @@ import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PlayedGameService {
@@ -36,7 +34,9 @@ public class PlayedGameService {
     public void createPlayedGame(String playerOne, String playerTwo){
         Member p1 = memberRepository.findById(playerOne).orElse(null);
         Member p2 = memberRepository.findById(playerTwo).orElse(null);
-        ScoreCard sC = new ScoreCard();
+        assert p1 != null;
+        assert p2 != null;
+        ScoreCard sC = new ScoreCard(p1.getFirstName(), p2.getFirstName());
         scoreCardRepository.save(sC);
         PlayedGameId id1 = new PlayedGameId(playerOne, sC.getId());
         PlayedGameId id2 = new PlayedGameId(playerTwo, sC.getId());
