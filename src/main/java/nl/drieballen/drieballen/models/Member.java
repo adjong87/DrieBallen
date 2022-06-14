@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "Leden")
+@Table(name = "members")
 public class Member {
 
     @Id
@@ -73,6 +71,7 @@ public class Member {
         return aimScore;
     }
 
+    @OneToMany
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
     }
@@ -118,5 +117,9 @@ public class Member {
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {
         this.playedGames = playedGames;
+    }
+
+    public void addPlayedGame(PlayedGame playedGame){
+        playedGames.add(playedGame);
     }
 }
