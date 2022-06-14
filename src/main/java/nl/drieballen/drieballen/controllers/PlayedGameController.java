@@ -25,9 +25,14 @@ public class PlayedGameController {
         return ResponseEntity.ok().body(playedGameList);
     }
 
+//    @PostMapping("/playedgame")
+//    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo, @RequestParam(value = "scoreCard") Long id) {
+//        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, id);
+//    }
+
     @PostMapping("/playedgame")
-    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo, @RequestParam(value = "scoreCard") Long id) {
-        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, id);
+    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo) {
+        playedGameService.createPlayedGame(playerOne, playerTwo);
     }
 
     //    @PostMapping("/{playerOne}/{playerTwo}/{scoreCardId}")

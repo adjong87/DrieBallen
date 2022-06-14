@@ -28,6 +28,17 @@ public class PlayedGame {
     public PlayedGame() {
     }
 
+    public PlayedGame(PlayedGameId id, Member member, ScoreCard scoreCard) {
+        this.id = id;
+        this.member = member;
+        this.scoreCard = scoreCard;
+    }
+
+    public PlayedGame(Member member, ScoreCard scoreCard) {
+        this.member = member;
+        this.scoreCard = scoreCard;
+    }
+
     public PlayedGameId getId() {
         return id;
     }
