@@ -52,10 +52,7 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
-    public boolean setUitgespeeld() {
-        if (Arrays.stream(scoreCard.getPlayerOneScore()).count() >= member.getAimScore()) {
-            return true;
-        }
-        else return false;
+    public void setUitgespeeld(boolean uitgespeeld) {
+        this.uitgespeeld = uitgespeeld;
     }
 }

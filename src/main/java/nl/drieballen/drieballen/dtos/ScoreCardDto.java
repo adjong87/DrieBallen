@@ -3,6 +3,7 @@ package nl.drieballen.drieballen.dtos;
 public class ScoreCardDto {
 
     private Long Id;
+
     private int[] playerOneScore;
 
     private int[] playerTwoScore;

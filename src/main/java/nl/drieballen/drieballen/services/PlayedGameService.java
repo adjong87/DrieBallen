@@ -10,6 +10,8 @@ import nl.drieballen.drieballen.repositories.PlayedGameRepository;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayedGameService {
 
@@ -23,6 +25,11 @@ public class PlayedGameService {
         this.memberRepository = memberRepository;
         this.scoreCardRepository = scoreCardRepository;
         this.playedGameRepository = playedGameRepository;
+    }
+
+    public List<PlayedGame> getAllPlayedGames(){
+        List<PlayedGame> playedGameList = playedGameRepository.findAll();
+        return playedGameList;
     }
 
     public void matchMemberToScoreCard(String playerOne, String playerTwo, Long scoreCardId){
@@ -52,22 +59,4 @@ public class PlayedGameService {
         scoreCardRepository.save(sC);
 
     }
-
-//    public void assignMembersToGame(Long playerOne, Long playerTwo, Long gameId) {
-//        var optionalPlayerOne = memberRepository.findById(playerOne);
-//        var optionalPlayerTwo = memberRepository.findById(playerTwo);
-//        var optionalGame = gameRepository.findById(gameId);
-//        if (optionalPlayerOne.isPresent() && optionalPlayerTwo.isPresent() && optionalGame.isPresent()) {
-//            var game = optionalGame.get();
-//            var player1 = optionalPlayerOne.get();
-//            var player2 = optionalPlayerTwo.get();
-//            game.setPlayerOne(player1);
-//            game.setPlayerTwo(player2);
-//            player1.setPlayedGames(game);
-//            gameRepository.save(game);
-//        } else {
-//            throw new RecordNotFoundException();
-//        }
-//    }
-
 }
