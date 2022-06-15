@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ScoreCardService {
@@ -31,18 +32,19 @@ public class ScoreCardService {
         return scoreCardDtoList;
     }
 
-    public ScoreCardDto createScoreCard(ScoreCardInputDto scoreCardInputDto) {
-        ScoreCard scoreCard = toScoreCard(scoreCardInputDto);
-        scoreCardRepository.save(scoreCard);
-        return fromScoreCard(scoreCard);
+    public ScoreCardDto correctScore(Long id, ScoreCardInputDto scoreCardInputDto){
+        ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("scorecard " + id + " doesn't exist"));
+        Objects.requireNonNull(sc).setId(id);
+        sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
+        sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
+        sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
+        scoreCardRepository.save(sc);
+        return fromScoreCard(sc);
     }
 
-    public ScoreCardDto updateScoreCard(Long id, ScoreCardInputDto scoreCardInputDto) {
-        if(!scoreCardRepository.existsById(id)) {
-            throw new RecordNotFoundException("No scorecard found");
-        }
-        ScoreCard sc = scoreCardRepository.findById(id).orElse(null);
-        sc.setId(id);
+    public ScoreCardDto fillInScore(Long id, ScoreCardInputDto scoreCardInputDto) {
+        ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Scorecard " + id + " doesn't exist"));
+        Objects.requireNonNull(sc).setId(id);
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
         sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
         sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
@@ -54,24 +56,15 @@ public class ScoreCardService {
         scoreCardRepository.deleteById(id);
     }
 
-    private static ScoreCard toScoreCard(ScoreCardInputDto scoreCardInputDto) {
-        var scoreCard = new ScoreCard();
-        scoreCard.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
-        scoreCard.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
-        if (scoreCardInputDto.getPlayerOneScore().length <= 30) {
-            scoreCard.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
-        } else {
-            throw new RecordNotFoundException("aantal beurten klopt niet");        }
-        return scoreCard;
-    }
-
     public static ScoreCardDto fromScoreCard(ScoreCard scoreCard) {
         var dto = new ScoreCardDto();
         dto.setId(scoreCard.getId());
+        dto.setPlayerOneName(scoreCard.getPlayerOneName());
+        dto.setPlayerTwoName(scoreCard.getPlayerTwoName());
         dto.setPlayerOneScore(scoreCard.getPlayerOneScore());
         dto.setPlayerTwoScore(scoreCard.getPlayerTwoScore());
         dto.setNrOfTurns(scoreCard.getNrOfTurns());
+        dto.setGespeeldOp(scoreCard.getGespeeldOp());
         return dto;
     }
-
 }

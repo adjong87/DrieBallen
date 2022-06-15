@@ -1,17 +1,32 @@
 package nl.drieballen.drieballen.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 public class ScoreCard {
 
+
+    public ScoreCard() {
+    }
+
+    public ScoreCard(String playerOneName, String playerTwoName) {
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
+
+    private String playerOneName;
+
+    private String playerTwoName;
 
     private int[] playerOneScore;
 
@@ -19,15 +34,25 @@ public class ScoreCard {
 
     private int nrOfTurns;
 
-    private LocalDateTime gespeeldOp;
+    @CreationTimestamp
+    private Calendar gespeeldOp;
 
     @JsonIgnore
     @OneToMany(mappedBy = "scoreCard")
     private Collection<PlayedGame> playedGames;
+
     // ----- GETTERS ------------
 
     public Long getId() {
         return id;
+    }
+
+    public String getPlayerOneName() {
+        return playerOneName;
+    }
+
+    public String getPlayerTwoName() {
+        return playerTwoName;
     }
 
     public int[] getPlayerOneScore() {
@@ -42,7 +67,7 @@ public class ScoreCard {
         return nrOfTurns;
     }
 
-    public LocalDateTime getGespeeldOp() {
+    public Calendar getGespeeldOp() {
         return gespeeldOp;
     }
 
@@ -69,7 +94,7 @@ public class ScoreCard {
         this.nrOfTurns = playerOneScore.length;
     }
 
-    public void setGespeeldOp(LocalDateTime gespeeldOp) {
+    public void setGespeeldOp(Calendar gespeeldOp) {
         this.gespeeldOp = gespeeldOp;
     }
 

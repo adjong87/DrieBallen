@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/referee")
+@RequestMapping("/chairman")
 public class PlayedGameController {
 
     private final PlayedGameService playedGameService;
@@ -18,21 +18,22 @@ public class PlayedGameController {
         this.playedGameService = playedGameService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
+//    @GetMapping("/")
+//    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
+//        List<PlayedGame> playedGameList;
+//        playedGameList = playedGameService.getAllPlayedGames();
+//        return ResponseEntity.ok().body(playedGameList);
+//    }
+
+    @GetMapping("/find")
+    public ResponseEntity<List<PlayedGame>> getAllPlayedGamesByFirstName(@RequestParam(value = "username") String username){
         List<PlayedGame> playedGameList;
-        playedGameList = playedGameService.getAllPlayedGames();
+        playedGameList = playedGameService.findPlayedGameById(username);
         return ResponseEntity.ok().body(playedGameList);
     }
 
-    @PostMapping("/playedgame")
-    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo, @RequestParam(value = "scoreCard") Long id) {
-        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, id);
+    @PostMapping("/createGame")
+    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo) {
+        playedGameService.createPlayedGame(playerOne, playerTwo);
     }
-
-    //    @PostMapping("/{playerOne}/{playerTwo}/{scoreCardId}")
-//    public void matchMemberToScoreCard(@PathVariable("playerOne") String playerOne, @PathVariable("playerTwo") String playerTwo, @PathVariable("scoreCardId") Long scoreCardId){
-//        playedGameService.matchMemberToScoreCard(playerOne, playerTwo, scoreCardId);
-//    }
-
 }
