@@ -10,3 +10,7 @@ INSERT INTO members (username, password, doB, first_name, last_name, email, age,
 INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('Greet', 'password', 21031987, 'Greet', 'Schaapherder', 'greet@gmail.com', 84, 'v', 27);
 INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('Ad', 'password', 27101993, 'Ad', 'nvt', 'ad@gmail.com', 57, 'v', 16);
 INSERT INTO members (username, password, doB, first_name, last_name, email, age, gender, aim_score) VALUES ('John', 'wachtwoord', 12121940, 'John', 'nvt', 'john@gmail.com', 69, 'm', 39);
+
+-- INSERT INTO roles(name) VALUES('ROLE_USER');
+-- INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+-- INSERT INTO roles(name) VALUES('ROLE_ADMIN');
