@@ -45,6 +45,8 @@ public class PlayedGameService {
         scoreCardRepository.save(sC);
         PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
         PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);
+        p1.addPlayedGame(pg1);
+        p2.addPlayedGame(pg2);
         playedGameRepository.save(pg1);
         playedGameRepository.save(pg2);
 
