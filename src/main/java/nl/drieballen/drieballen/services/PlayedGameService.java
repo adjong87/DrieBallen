@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.services;
 
+import nl.drieballen.drieballen.controllers.PlayedGameController;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.PlayedGame;
@@ -46,6 +47,7 @@ public class PlayedGameService {
         PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);
         playedGameRepository.save(pg1);
         playedGameRepository.save(pg2);
+
     }
 
 //    public void matchMemberToScoreCard(String playerOne, String playerTwo, Long scoreCardId){

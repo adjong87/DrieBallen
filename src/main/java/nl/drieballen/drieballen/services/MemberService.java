@@ -6,12 +6,14 @@ import nl.drieballen.drieballen.exceptions.UsernameNotFoundException;
 import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.repositories.MemberRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;

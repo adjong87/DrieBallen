@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/members")
 public class MemberController {
 
@@ -33,7 +34,7 @@ public class MemberController {
         return ResponseEntity.ok().body(optionalMember);
     }
 
-    @PostMapping("")
+    @PostMapping("/add")
     public MemberDto addMember(@RequestBody MemberInputDto memberInputDto){
         return memberService.addMember(memberInputDto);
     }
