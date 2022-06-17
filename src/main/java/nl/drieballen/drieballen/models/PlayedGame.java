@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +9,6 @@ public class PlayedGame {
     PlayedGameId id;
 
     @ManyToOne
-    @JsonIgnore
     @MapsId("memberUsername")
     @JoinColumn(name = "member_username")
     Member member;

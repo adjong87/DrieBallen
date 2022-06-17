@@ -15,9 +15,11 @@ public class ScoreCard {
     public ScoreCard() {
     }
 
-    public ScoreCard(String playerOneName, String playerTwoName) {
+    public ScoreCard(String playerOneName, String playerTwoName, int aimScoreP1, int aimScoreP2) {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
+        this.aimScoreP1 = aimScoreP1;
+        this.aimScoreP2 = aimScoreP2;
     }
 
     @Id
@@ -32,6 +34,10 @@ public class ScoreCard {
 
     private int[] playerTwoScore;
 
+    private int aimScoreP1;
+
+    private int aimScoreP2;
+
     private int nrOfTurns;
 
     @CreationTimestamp
@@ -40,6 +46,8 @@ public class ScoreCard {
     @JsonIgnore
     @OneToMany(mappedBy = "scoreCard")
     private Collection<PlayedGame> playedGames;
+
+    private boolean filledIn;
 
     // ----- GETTERS ------------
 
@@ -63,6 +71,14 @@ public class ScoreCard {
         return playerTwoScore;
     }
 
+    public int getAimScoreP1() {
+        return aimScoreP1;
+    }
+
+    public int getAimScoreP2() {
+        return aimScoreP2;
+    }
+
     public int getNrOfTurns() {
         return nrOfTurns;
     }
@@ -73,6 +89,10 @@ public class ScoreCard {
 
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
+    }
+
+    public boolean isFilledIn() {
+        return filledIn;
     }
 
     // ----- SETTERS ------------
@@ -104,5 +124,9 @@ public class ScoreCard {
 
     public void addPlayedGame(PlayedGame playedGame){
         playedGames.add(playedGame);
+    }
+
+    public void setFilledIn(boolean filledIn) {
+        this.filledIn = filledIn;
     }
 }
