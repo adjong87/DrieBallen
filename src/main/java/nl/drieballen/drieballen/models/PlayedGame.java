@@ -1,6 +1,7 @@
 package nl.drieballen.drieballen.models;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
@@ -34,6 +35,21 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
+    public void determineWin() {
+        if (member.getFirstName() == scoreCard.getPlayerOneName()) {
+            if (Arrays.stream(scoreCard.getPlayerOneScore()).sum() > member.getAimScore()) {
+                uitgespeeld = true;
+            } else uitgespeeld = false;
+        }
+        {
+            if (Arrays.stream(scoreCard.getPlayerTwoScore()).sum() > member.getAimScore()) {
+                uitgespeeld = true;
+            }
+            else uitgespeeld = false;
+        }
+    }
+
+
     public PlayedGameId getId() {
         return id;
     }
@@ -65,4 +81,6 @@ public class PlayedGame {
     public void setUitgespeeld(boolean uitgespeeld) {
         this.uitgespeeld = uitgespeeld;
     }
+
 }
+        }

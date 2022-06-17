@@ -3,6 +3,7 @@ package nl.drieballen.drieballen.dtos;
 public class MemberInputDto {
 
     private String username;
+
     private String password;
 
     private int doB;
