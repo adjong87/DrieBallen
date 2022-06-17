@@ -15,6 +15,10 @@ public class ScoreCardDto {
 
     private int[] playerTwoScore;
 
+    private int aimScoreP1;
+
+    private int aimScoreP2;
+
     private int nrOfTurns;
 
     private Calendar gespeeldOp;
@@ -47,6 +51,14 @@ public class ScoreCardDto {
         return playerTwoScore;
     }
 
+    public int getAimScoreP1() {
+        return aimScoreP1;
+    }
+
+    public int getAimScoreP2() {
+        return aimScoreP2;
+    }
+
     public int getNrOfTurns() {
         return nrOfTurns;
     }
@@ -76,6 +88,14 @@ public class ScoreCardDto {
 
     public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
+    }
+
+    public void setAimScoreP1(int aimScoreP1) {
+        this.aimScoreP1 = aimScoreP1;
+    }
+
+    public void setAimScoreP2(int aimScoreP2) {
+        this.aimScoreP2 = aimScoreP2;
     }
 
     public void setNrOfTurns(int nrOfTurns) {

@@ -21,6 +21,13 @@ public class ScoreCardController {
         this.scoreCardService = scoreCardService;
     }
 
+    @GetMapping("/referee")
+    public ResponseEntity<List<ScoreCardDto>> getAllNonFilled(){
+        List<ScoreCardDto>scoreCardDtoList;
+        scoreCardDtoList = scoreCardService.getAllNonFilled();
+        return ResponseEntity.ok().body(scoreCardDtoList);
+    }
+
     @GetMapping("")
     public ResponseEntity<List<ScoreCardDto>> getAllScoreCards(){
         List<ScoreCardDto> scoreCardDtoList;

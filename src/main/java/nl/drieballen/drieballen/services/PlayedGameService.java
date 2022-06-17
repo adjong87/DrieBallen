@@ -41,7 +41,7 @@ public class PlayedGameService {
     public void createPlayedGame(String playerOne, String playerTwo){
         Member p1 = memberRepository.findById(playerOne).orElseThrow(() -> new RecordNotFoundException("username " + playerOne + " doesn't exist"));
         Member p2 = memberRepository.findById(playerTwo).orElseThrow(() -> new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
-        ScoreCard sC = new ScoreCard(p1.getFirstName(), p2.getFirstName());
+        ScoreCard sC = new ScoreCard(p1.getFirstName(), p2.getFirstName(), p1.getAimScore(), p2.getAimScore());
         scoreCardRepository.save(sC);
         PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
         PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);

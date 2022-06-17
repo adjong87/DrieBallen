@@ -23,6 +23,15 @@ public class ScoreCardService {
         this.scoreCardRepository = scoreCardRepository;
     }
 
+    public List<ScoreCardDto> getAllNonFilled(){
+        List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();
+        List<ScoreCard> scoreCardList = scoreCardRepository.findScoreCardByFilledInIs(false);
+        for (ScoreCard scoreCard : scoreCardList) {
+            scoreCardDtoList.add(fromScoreCard(scoreCard));
+        }
+        return scoreCardDtoList;
+    }
+
     public List<ScoreCardDto> getAllScoreCards() {
         List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();
         List<ScoreCard> scoreCardList = scoreCardRepository.findAll();
@@ -48,6 +57,7 @@ public class ScoreCardService {
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
         sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
         sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
+        sc.setFilledIn(true);
         scoreCardRepository.save(sc);
         return fromScoreCard(sc);
     }
@@ -63,6 +73,8 @@ public class ScoreCardService {
         dto.setPlayerTwoName(scoreCard.getPlayerTwoName());
         dto.setPlayerOneScore(scoreCard.getPlayerOneScore());
         dto.setPlayerTwoScore(scoreCard.getPlayerTwoScore());
+        dto.setAimScoreP1(scoreCard.getAimScoreP1());
+        dto.setAimScoreP2(scoreCard.getAimScoreP2());
         dto.setNrOfTurns(scoreCard.getNrOfTurns());
         dto.setGespeeldOp(scoreCard.getGespeeldOp());
         return dto;

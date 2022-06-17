@@ -6,6 +6,8 @@ public class ScoreCardInputDto {
 
     private int[] playerTwoScore;
 
+    private boolean filledIn;
+
     public ScoreCardInputDto(int[] playerOneScore, int[] playerTwoScore) {
         this.playerOneScore = playerOneScore;
         this.playerTwoScore = playerTwoScore;
@@ -17,6 +19,10 @@ public class ScoreCardInputDto {
 
     public int[] getPlayerTwoScore() {
         return playerTwoScore;
+    }
+
+    public boolean isFilledIn() {
+        return filledIn;
     }
 }
 
