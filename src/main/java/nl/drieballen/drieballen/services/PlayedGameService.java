@@ -34,7 +34,7 @@ public class PlayedGameService {
 //    }
 
     public List<PlayedGame> findPlayedGameById(String username){
-        List<PlayedGame> playedGamesList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCase(username);
+        List<PlayedGame> playedGamesList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(username);
         return playedGamesList;
     }
 

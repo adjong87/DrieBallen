@@ -2,6 +2,7 @@ package nl.drieballen.drieballen.services;
 
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
+import nl.drieballen.drieballen.exceptions.BadRequestException;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
@@ -53,13 +54,16 @@ public class ScoreCardService {
 
     public ScoreCardDto fillInScore(Long id, ScoreCardInputDto scoreCardInputDto) {
         ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Scorecard " + id + " doesn't exist"));
-        Objects.requireNonNull(sc).setId(id);
-        sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
-        sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
-        sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
-        sc.setFilledIn(true);
-        scoreCardRepository.save(sc);
-        return fromScoreCard(sc);
+        if(!sc.isFilledIn()) {
+            Objects.requireNonNull(sc).setId(id);
+            sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
+            sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
+            sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
+            sc.setFilledIn(true);
+            scoreCardRepository.save(sc);
+            return fromScoreCard(sc);
+        }
+        else throw new BadRequestException("It is not allowed to adjust the score for this game again");
     }
 
     public void deleteScoreCard(Long id){

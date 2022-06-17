@@ -9,6 +9,8 @@ import java.util.List;
 public interface PlayedGameRepository extends JpaRepository<PlayedGame, PlayedGameId> {
 
     List<PlayedGame> findPlayedGamesById_UsernameContainingIgnoreCase(String username);
+
+    List<PlayedGame> findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(String username);
     List<PlayedGame> findAllByIdContaining(String username);
 
 }

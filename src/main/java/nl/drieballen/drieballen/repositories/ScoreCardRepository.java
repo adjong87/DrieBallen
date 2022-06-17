@@ -8,4 +8,7 @@ import java.util.List;
 public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 
     List<ScoreCard> findScoreCardByFilledInIs(boolean b);
+
+    ScoreCard findByIdAndFilledInIs(Long id, boolean b);
+
 }
