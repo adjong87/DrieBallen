@@ -18,6 +18,7 @@ public class ScoreCardDto {
     private int aimScoreP1;
 
     private int aimScoreP2;
+
     private int nrOfTurns;
 
     private Calendar gespeeldOp;

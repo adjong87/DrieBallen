@@ -57,7 +57,7 @@ public class ScoreCardService {
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
         sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
         sc.setNrOfTurns(scoreCardInputDto.getPlayerOneScore().length);
-        sc.setFilledIn(scoreCardInputDto.isFilledIn());
+        sc.setFilledIn(true);
         scoreCardRepository.save(sc);
         return fromScoreCard(sc);
     }
