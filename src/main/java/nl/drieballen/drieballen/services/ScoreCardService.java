@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ScoreCardService {
@@ -31,6 +32,17 @@ public class ScoreCardService {
             scoreCardDtoList.add(fromScoreCard(scoreCard));
         }
         return scoreCardDtoList;
+    }
+
+    public ScoreCardDto getScoreCard(Long id) {
+        ScoreCardDto dto = new ScoreCardDto();
+        Optional<ScoreCard> scoreCard = scoreCardRepository.findById(id);
+        if (scoreCard.isPresent()) {
+            dto = fromScoreCard(scoreCard.get());
+        } else {
+            throw new RecordNotFoundException("deze scorecard bestaat niet");
+        }
+        return dto;
     }
 
     public List<ScoreCardDto> getAllScoreCards() {
