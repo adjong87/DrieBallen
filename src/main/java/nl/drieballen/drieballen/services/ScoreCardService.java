@@ -1,9 +1,13 @@
 package nl.drieballen.drieballen.services;
 
+import nl.drieballen.drieballen.dtos.MemberDto;
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
+import nl.drieballen.drieballen.exceptions.UsernameNotFoundException;
+import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.ScoreCard;
+import nl.drieballen.drieballen.repositories.PlayedGameRepository;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ScoreCardService {
@@ -23,7 +28,7 @@ public class ScoreCardService {
         this.scoreCardRepository = scoreCardRepository;
     }
 
-    public List<ScoreCardDto> getAllNonFilled(){
+    public List<ScoreCardDto> getAllNonFilled() {
         List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();
         List<ScoreCard> scoreCardList = scoreCardRepository.findScoreCardByFilledInIs(false);
         for (ScoreCard scoreCard : scoreCardList) {
@@ -31,6 +36,8 @@ public class ScoreCardService {
         }
         return scoreCardDtoList;
     }
+
+
 
     public List<ScoreCardDto> getAllScoreCards() {
         List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();
@@ -41,7 +48,7 @@ public class ScoreCardService {
         return scoreCardDtoList;
     }
 
-    public ScoreCardDto correctScore(Long id, ScoreCardInputDto scoreCardInputDto){
+    public ScoreCardDto correctScore(Long id, ScoreCardInputDto scoreCardInputDto) {
         ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("scorecard " + id + " doesn't exist"));
         Objects.requireNonNull(sc).setId(id);
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
@@ -62,7 +69,7 @@ public class ScoreCardService {
         return fromScoreCard(sc);
     }
 
-    public void deleteScoreCard(Long id){
+    public void deleteScoreCard(Long id) {
         scoreCardRepository.deleteById(id);
     }
 
