@@ -1,7 +1,6 @@
 package nl.drieballen.drieballen.security.jwt;
 
 import nl.drieballen.drieballen.services.UserDetailsServiceImpl;
-
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
