@@ -29,6 +29,11 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
+    @GetMapping("/card")
+    public ResponseEntity<ScoreCardDto> getScoreCard(@RequestParam("id") Long id){
+        ScoreCardDto dto = scoreCardService.getScoreCard(id);
+        return ResponseEntity.ok().body(dto);
+    }
 
     @PutMapping("/correct")
     public ScoreCardDto correctScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){

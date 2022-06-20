@@ -37,6 +37,16 @@ public class ScoreCardService {
         return scoreCardDtoList;
     }
 
+    public ScoreCardDto getScoreCard(Long id) {
+        ScoreCardDto dto = new ScoreCardDto();
+        Optional<ScoreCard> scoreCard = scoreCardRepository.findById(id);
+        if (scoreCard.isPresent()) {
+            dto = fromScoreCard(scoreCard.get());
+        } else {
+            throw new RecordNotFoundException("deze scorecard bestaat niet");
+        }
+        return dto;
+    }
 
 
     public List<ScoreCardDto> getAllScoreCards() {
