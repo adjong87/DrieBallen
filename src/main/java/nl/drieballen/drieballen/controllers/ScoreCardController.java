@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.controllers;
 
+import nl.drieballen.drieballen.dtos.MemberDto;
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.services.ScoreCardService;
@@ -28,12 +29,6 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<ScoreCardDto>> getAllScoreCards(){
-        List<ScoreCardDto> scoreCardDtoList;
-        scoreCardDtoList = scoreCardService.getAllScoreCards();
-        return ResponseEntity.ok().body(scoreCardDtoList);
-    }
 
     @PutMapping("/correct")
     public ScoreCardDto correctScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
