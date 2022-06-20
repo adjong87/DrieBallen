@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.payload.request;
-
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
@@ -13,14 +12,13 @@ public class LoginRequest {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public void setPassword(String password) {
         this.password = password;
     }
