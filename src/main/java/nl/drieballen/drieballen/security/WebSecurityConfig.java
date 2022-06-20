@@ -1,5 +1,8 @@
 package nl.drieballen.drieballen.security;
 
+import nl.drieballen.drieballen.security.jwt.AuthEntryPointJwt;
+import nl.drieballen.drieballen.security.jwt.AuthTokenFilter;
+import nl.drieballen.drieballen.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,18 +26,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private AuthEntryPoint unauthorizedHandler;
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter(){
-        return AuthTokenFilter();
+        return new AuthTokenFilter();
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder){
-        authenticationManagerBuilder.userDetailsService((userDetailsService).passwirdEncoder());
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -42,11 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    public PasswordEncoder passwirdEncoder(){
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    @Override void configure(HttpSecurity httpSecurity) throws Exception {
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

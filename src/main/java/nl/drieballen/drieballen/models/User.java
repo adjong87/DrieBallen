@@ -8,12 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(value = name + "users",
+@Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
 public class User {
+
         @Id
         @GeneratedValue
         private Long id;
@@ -34,7 +35,7 @@ public class User {
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable( name = "user_roles",
                 joinColumns =  @JoinColumn(name = "user_id"),
-                inverseForeignKey = @JoinColumn(name = "role_id"))
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
         private Set<Role> roles = new HashSet<>();
 
         public User(String username, String email, String password) {
