@@ -10,7 +10,7 @@ import nl.drieballen.drieballen.payload.response.MessageResponse;
 import nl.drieballen.drieballen.repositories.RoleRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import nl.drieballen.drieballen.security.jwt.JwtUtils;
-import nl.drieballen.drieballen.services.UserDetailsImpl;
+import nl.drieballen.drieballen.security.services.UserDetailsImpl;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

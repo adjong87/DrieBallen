@@ -2,8 +2,7 @@ package nl.drieballen.drieballen.security;
 
 import nl.drieballen.drieballen.security.jwt.AuthEntryPointJwt;
 import nl.drieballen.drieballen.security.jwt.AuthTokenFilter;
-import nl.drieballen.drieballen.services.UserDetailsServiceImpl;
-
+import nl.drieballen.drieballen.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
@@ -52,13 +50,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
-                .anyRequest().authenticated();
 
+        http
+                .httpBasic().and().csrf().disable().formLogin().disable()
+                .cors().and()
+                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/members/profile").hasAnyRole("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/members/**").hasRole("ADMIN")
+                .antMatchers("/members/delete/**").hasRole("ADMIN")
+                .antMatchers("/scorecards/card").hasAnyRole("ADMIN", "USER", "MODERATOR")
+                .antMatchers("/scorecards/**").hasRole("MODERATOR")
+//                .antMatchers("/scorecards/referee").hasRole("MOD")
+//                .antMatchers("/scorecards/fill").hasRole("MOD")
+//                .antMatchers("/scorecards/delete").hasRole("ADMIN")
+                .antMatchers("/playedGame/find").hasAnyRole("USER", "ADMIN", "MODERATOR")
+                .antMatchers("/playedGame/createGame").hasRole("ADMIN")
+                .anyRequest().denyAll()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
