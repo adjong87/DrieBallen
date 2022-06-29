@@ -1,41 +1,49 @@
 package nl.drieballen.drieballen.dtos;
-
 import nl.drieballen.drieballen.models.PlayedGame;
-
-import java.time.LocalDateTime;
 import java.util.Collection;
+import nl.drieballen.drieballen.models.User;
+
 
 public class MemberDto {
-
     private String username;
-    private int doB;
-
     private String firstName;
 
     private String lastName;
 
+    private String email;
+
+    private int age;
+
+    private char gender;
     private int aimScore;
 
     private Collection<PlayedGame> playedGames;
-    private LocalDateTime gameStartedAt;
+
 
     // ----- GETTERS ------------
-
 
     public String getUsername() {
         return username;
     }
 
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
 
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
-    public int getDoB() {
-        return doB;
+    public String getEmail() {
+        return email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public char getGender() {
+        return gender;
     }
 
     public int getAimScore() {
@@ -46,13 +54,8 @@ public class MemberDto {
         return playedGames;
     }
 
-    public LocalDateTime gameStartedAt() {
-        return gameStartedAt;
-    }
-
 
     // ----- SETTERS ------------
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -66,8 +69,16 @@ public class MemberDto {
         this.lastName = lastName;
     }
 
-    public void setDoB(int doB) {
-        this.doB = doB;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
     }
 
     public void setAimScore(int aimScore) {
@@ -77,6 +88,7 @@ public class MemberDto {
     public void setPlayedGames(Collection<PlayedGame> playedGames) {
         this.playedGames = playedGames;
     }
+
 }
 
 

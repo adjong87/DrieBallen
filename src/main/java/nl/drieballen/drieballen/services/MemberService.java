@@ -4,10 +4,13 @@ import nl.drieballen.drieballen.dtos.MemberDto;
 import nl.drieballen.drieballen.dtos.MemberInputDto;
 import nl.drieballen.drieballen.exceptions.UsernameNotFoundException;
 import nl.drieballen.drieballen.models.Member;
+import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.MemberRepository;
+import nl.drieballen.drieballen.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +21,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
+    private final UserRepository userRepository;
+
+    public MemberService(MemberRepository memberRepository, UserRepository userRepository) {
         this.memberRepository = memberRepository;
+        this.userRepository = userRepository;
     }
 
     public List<MemberDto> getAllMembers(){
@@ -33,9 +39,9 @@ public class MemberService {
 
     public MemberDto getMember(String username) {
         MemberDto dto = new MemberDto();
-        Optional<Member> member = memberRepository.findById(username);
-        if (member.isPresent()){
-            dto = fromMember(member.get());
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()){
+//            dto = fromMember();
         }else {
             throw new UsernameNotFoundException(username);
         }
@@ -51,13 +57,11 @@ public class MemberService {
     private static Member toMember(MemberInputDto memberInputDto) {
         var member = new Member();
         member.setUsername(memberInputDto.getUsername());
-        member.setPassword(memberInputDto.getPassword());
-        member.setDoB(memberInputDto.getDoB());
         member.setFirstName(memberInputDto.getFirstName());
         member.setLastName(memberInputDto.getLastName());
         member.setEmail(memberInputDto.getEmail());
-        member.setGender(memberInputDto.getGender());
         member.setAge(memberInputDto.getAge());
+        member.setGender(memberInputDto.getGender());
         member.setAimScore(memberInputDto.getAimScore());
         return member;
     }
@@ -65,15 +69,15 @@ public class MemberService {
     public static MemberDto fromMember(Member member) {
         var dto = new MemberDto();
         dto.setUsername(member.getUsername());
-        dto.setDoB(member.getDoB());
         dto.setFirstName(member.getFirstName());
         dto.setLastName(member.getLastName());
+        dto.setAge(member.getAge());
+        dto.setGender(member.getGender());
         dto.setAimScore(member.getAimScore());
-        dto.setPlayedGames(member.getPlayedGames());
         return dto;
     }
 
     public void deleteMember(String username) {
-        memberRepository.deleteById(username);
+        memberRepository.deleteByUsername(username);
     }
 }

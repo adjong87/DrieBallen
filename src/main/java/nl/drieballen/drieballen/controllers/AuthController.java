@@ -1,21 +1,25 @@
 package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.models.ERole;
+import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.Role;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.payload.request.LoginRequest;
 import nl.drieballen.drieballen.payload.request.SignupRequest;
 import nl.drieballen.drieballen.payload.response.JwtResponse;
 import nl.drieballen.drieballen.payload.response.MessageResponse;
+import nl.drieballen.drieballen.repositories.MemberRepository;
 import nl.drieballen.drieballen.repositories.RoleRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import nl.drieballen.drieballen.security.jwt.JwtUtils;
 import nl.drieballen.drieballen.security.services.UserDetailsImpl;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +39,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    MemberRepository memberRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -63,7 +70,6 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
@@ -82,11 +88,13 @@ public class AuthController {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
-
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
+        Member member = new Member(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getAimScore());
+        member.setUser(user);
+        memberRepository.save(member);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -98,22 +106,21 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case "admin" -> {
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
-
-                        break;
-                    case "mod":
+                    }
+                    case "mod" -> {
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
-
-                        break;
-                    default:
+                    }
+                    default -> {
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+                    }
                 }
             });
         }

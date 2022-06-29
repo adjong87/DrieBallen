@@ -10,11 +10,8 @@ import java.util.Collection;
 public class Member {
 
     @Id
+    @Column(name = "username")
     private String username;
-
-    private String password;
-
-    private int doB;
 
     private String firstName;
 
@@ -32,15 +29,28 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private Collection<PlayedGame> playedGames;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    User user;
+
+    public Member(String username, String firstName, String lastName, String email, int age, char gender, int aimScore) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.aimScore = aimScore;
+    }
+
+    public Member() {
+    }
+
     // ----- GETTERS ------------
 
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getFirstName() {
@@ -59,10 +69,6 @@ public class Member {
         return age;
     }
 
-    public int getDoB() {
-        return doB;
-    }
-
     public char getGender() {
         return gender;
     }
@@ -76,15 +82,15 @@ public class Member {
         return playedGames;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     // ----- SETTERS ------------
 
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setFirstName(String firstName) {
@@ -103,10 +109,6 @@ public class Member {
         this.age = age;
     }
 
-    public void setDoB(int doB) {
-        this.doB = doB;
-    }
-
     public void setGender(char gender) {
         this.gender = gender;
     }
@@ -122,4 +124,9 @@ public class Member {
     public void addPlayedGame(PlayedGame playedGame){
         playedGames.add(playedGame);
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
+
