@@ -6,15 +6,12 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "members")
-public class Member {
+@Table(name = "profiles")
+public class Profile {
 
     @Id
+    @Column(name = "username")
     private String username;
-
-    private String password;
-
-    private int doB;
 
     private String firstName;
 
@@ -29,18 +26,27 @@ public class Member {
     private int aimScore;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "profile")
     private Collection<PlayedGame> playedGames;
+
+    public Profile(String username, String firstName, String lastName, String email, int age, char gender, int aimScore) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.aimScore = aimScore;
+    }
+
+    public Profile() {
+    }
 
     // ----- GETTERS ------------
 
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getFirstName() {
@@ -57,10 +63,6 @@ public class Member {
 
     public int getAge() {
         return age;
-    }
-
-    public int getDoB() {
-        return doB;
     }
 
     public char getGender() {
@@ -83,10 +85,6 @@ public class Member {
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -101,10 +99,6 @@ public class Member {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setDoB(int doB) {
-        this.doB = doB;
     }
 
     public void setGender(char gender) {
@@ -122,4 +116,6 @@ public class Member {
     public void addPlayedGame(PlayedGame playedGame){
         playedGames.add(playedGame);
     }
+
 }
+

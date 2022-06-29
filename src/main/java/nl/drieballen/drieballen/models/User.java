@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.models;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,10 +16,8 @@ import javax.validation.constraints.Size;
         })
 public class User {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-
         @NotBlank
+        @Column(name = "username")
         @Size(max = 20)
         private String username;
 
@@ -33,9 +32,13 @@ public class User {
 
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable( name = "user_roles",
-                joinColumns = @JoinColumn(name = "user_id"),
+                joinColumns = @JoinColumn(name = "user_username"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
         private Set<Role> roles = new HashSet<>();
+
+        @OneToOne
+        @JoinColumn(name="member_profile")
+        private Profile profile;
 
         public User() {
         }
@@ -44,14 +47,6 @@ public class User {
                 this.username = username;
                 this.email = email;
                 this.password = password;
-        }
-
-        public Long getId() {
-                return id;
-        }
-
-        public void setId(Long id) {
-                this.id = id;
         }
 
         public String getUsername() {
@@ -84,5 +79,12 @@ public class User {
 
         public void setRoles(Set<Role> roles) {
                 this.roles = roles;
+        }
+
+        public Profile getMember() {
+                return profile;
+        }
+        public void setMember(Profile profile) {
+                this.profile = profile;
         }
 }

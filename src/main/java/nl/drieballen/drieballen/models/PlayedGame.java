@@ -10,9 +10,9 @@ public class PlayedGame {
     PlayedGameId id;
 
     @ManyToOne
-    @MapsId("memberUsername")
-    @JoinColumn(name = "member_username")
-    Member member;
+    @MapsId("profileUsername")
+    @JoinColumn(name = "profile_username")
+    Profile profile;
 
     @ManyToOne
     @MapsId(value = "scoreCardId")
@@ -24,25 +24,25 @@ public class PlayedGame {
     public PlayedGame() {
     }
 
-    public PlayedGame(PlayedGameId id, Member member, ScoreCard scoreCard) {
+    public PlayedGame(PlayedGameId id, Profile profile, ScoreCard scoreCard) {
         this.id = id;
-        this.member = member;
+        this.profile = profile;
         this.scoreCard = scoreCard;
     }
 
-    public PlayedGame(Member member, ScoreCard scoreCard) {
-        this.member = member;
+    public PlayedGame(Profile profile, ScoreCard scoreCard) {
+        this.profile = profile;
         this.scoreCard = scoreCard;
     }
 
     public void determineWin() {
-        if (member.getFirstName() == scoreCard.getPlayerOneName()) {
-            if (Arrays.stream(scoreCard.getPlayerOneScore()).sum() > member.getAimScore()) {
+        if (profile.getFirstName() == scoreCard.getPlayerOneName()) {
+            if (Arrays.stream(scoreCard.getPlayerOneScore()).sum() > profile.getAimScore()) {
                 uitgespeeld = true;
             } else uitgespeeld = false;
         }
         {
-            if (Arrays.stream(scoreCard.getPlayerTwoScore()).sum() > member.getAimScore()) {
+            if (Arrays.stream(scoreCard.getPlayerTwoScore()).sum() > profile.getAimScore()) {
                 uitgespeeld = true;
             }
             else uitgespeeld = false;
@@ -54,8 +54,8 @@ public class PlayedGame {
         return id;
     }
 
-    public Member getMember() {
-        return member;
+    public Profile getProfile() {
+        return profile;
     }
 
     public ScoreCard getScoreCard() {
@@ -70,8 +70,8 @@ public class PlayedGame {
         this.id = id;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public void setScoreCard(ScoreCard scoreCard) {

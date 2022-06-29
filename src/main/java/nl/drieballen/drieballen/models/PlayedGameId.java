@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Embeddable
 public class PlayedGameId implements Serializable {
 
-    @Column(name = "member_username")
+    @Column(name = "profile_username")
     String username;
 
     @Column(name = "scorecard_id")
