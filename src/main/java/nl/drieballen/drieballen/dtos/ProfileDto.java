@@ -1,18 +1,10 @@
-package nl.drieballen.drieballen.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+package nl.drieballen.drieballen.dtos;
+import nl.drieballen.drieballen.models.PlayedGame;
 import java.util.Collection;
 
-@Entity
-@Table(name = "members")
-public class Member {
 
-    @Id
-    @Column(name = "username")
+public class ProfileDto {
     private String username;
-
     private String firstName;
 
     private String lastName;
@@ -25,29 +17,10 @@ public class Member {
 
     private int aimScore;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "member")
     private Collection<PlayedGame> playedGames;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    User user;
-
-    public Member(String username, String firstName, String lastName, String email, int age, char gender, int aimScore) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-        this.gender = gender;
-        this.aimScore = aimScore;
-    }
-
-    public Member() {
-    }
 
     // ----- GETTERS ------------
-
 
     public String getUsername() {
         return username;
@@ -77,17 +50,12 @@ public class Member {
         return aimScore;
     }
 
-    @OneToMany
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
     }
 
-    public User getUser() {
-        return user;
-    }
 
     // ----- SETTERS ------------
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -121,12 +89,7 @@ public class Member {
         this.playedGames = playedGames;
     }
 
-    public void addPlayedGame(PlayedGame playedGame){
-        playedGames.add(playedGame);
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
+
+
 

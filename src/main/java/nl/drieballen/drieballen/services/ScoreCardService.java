@@ -1,13 +1,9 @@
 package nl.drieballen.drieballen.services;
 
-import nl.drieballen.drieballen.dtos.MemberDto;
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
-import nl.drieballen.drieballen.exceptions.UsernameNotFoundException;
-import nl.drieballen.drieballen.models.Member;
 import nl.drieballen.drieballen.models.ScoreCard;
-import nl.drieballen.drieballen.repositories.PlayedGameRepository;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

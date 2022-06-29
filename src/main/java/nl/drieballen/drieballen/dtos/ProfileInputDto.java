@@ -1,6 +1,6 @@
 package nl.drieballen.drieballen.dtos;
 
-public class MemberInputDto {
+public class ProfileInputDto {
 
     private String username;
 

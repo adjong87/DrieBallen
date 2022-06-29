@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.models;
 
-import org.apache.tomcat.jni.Address;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,9 +36,9 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
         private Set<Role> roles = new HashSet<>();
 
-//        @OneToOne(cascade = CascadeType.ALL)
-//        @PrimaryKeyJoinColumn
-//        private Member member;
+        @OneToOne
+        @JoinColumn(name="member_profile")
+        private Profile profile;
 
         public User() {
         }
@@ -83,11 +81,10 @@ public class User {
                 this.roles = roles;
         }
 
-//        public Member getMember() {
-//                return member;
-//        }
-//
-//        public void setMember(Member member) {
-//                this.member = member;
-//        }
+        public Profile getMember() {
+                return profile;
+        }
+        public void setMember(Profile profile) {
+                this.profile = profile;
+        }
 }

@@ -1,13 +1,10 @@
 package nl.drieballen.drieballen.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 public class ScoreCard {

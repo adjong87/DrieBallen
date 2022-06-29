@@ -1,14 +1,14 @@
 package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.models.ERole;
-import nl.drieballen.drieballen.models.Member;
+import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.Role;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.payload.request.LoginRequest;
 import nl.drieballen.drieballen.payload.request.SignupRequest;
 import nl.drieballen.drieballen.payload.response.JwtResponse;
 import nl.drieballen.drieballen.payload.response.MessageResponse;
-import nl.drieballen.drieballen.repositories.MemberRepository;
+import nl.drieballen.drieballen.repositories.ProfileRepository;
 import nl.drieballen.drieballen.repositories.RoleRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import nl.drieballen.drieballen.security.jwt.JwtUtils;
@@ -41,7 +41,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    MemberRepository memberRepository;
+    ProfileRepository profileRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -89,12 +89,15 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
         // Create new user's account
+
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-        Member member = new Member(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getAimScore());
-        member.setUser(user);
-        memberRepository.save(member);
+        userRepository.save(user);
+        Profile profile = new Profile(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getAimScore());
+        profileRepository.save(profile);
+
+        user.setMember(profile);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
