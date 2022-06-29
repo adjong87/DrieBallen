@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -40,8 +41,7 @@ public class ScoreCard {
 
     private int nrOfTurns;
 
-    @CreationTimestamp
-    private Calendar gespeeldOp;
+    private LocalDate gespeeldOp = LocalDate.now();
 
     @JsonIgnore
     @OneToMany(mappedBy = "scoreCard")
@@ -83,7 +83,7 @@ public class ScoreCard {
         return nrOfTurns;
     }
 
-    public Calendar getGespeeldOp() {
+    public LocalDate getGespeeldOp() {
         return gespeeldOp;
     }
 
@@ -114,7 +114,7 @@ public class ScoreCard {
         this.nrOfTurns = playerOneScore.length;
     }
 
-    public void setGespeeldOp(Calendar gespeeldOp) {
+    public void setGespeeldOp(LocalDate gespeeldOp) {
         this.gespeeldOp = gespeeldOp;
     }
 

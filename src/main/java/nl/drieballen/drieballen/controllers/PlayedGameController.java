@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/chairman")
+@RequestMapping("/playedGame")
 public class PlayedGameController {
 
     private final PlayedGameService playedGameService;

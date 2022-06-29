@@ -21,7 +21,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<MemberDto>> getAllMembers(){
         List<MemberDto>memberDtoList;
         memberDtoList = memberService.getAllMembers();
@@ -34,12 +34,12 @@ public class MemberController {
         return ResponseEntity.ok().body(optionalMember);
     }
 
-    @PostMapping("/add")
+    @PostMapping(value="/add")
     public MemberDto addMember(@RequestBody MemberInputDto memberInputDto){
         return memberService.addMember(memberInputDto);
     }
 
-    @DeleteMapping(value = "/{username}")
+    @DeleteMapping(value = "/delete/{username}")
     public String deleteMember(@PathVariable("username") String username) {
         memberService.deleteMember(username);
         return "Gebruiker " + username + " is verwijderd";
