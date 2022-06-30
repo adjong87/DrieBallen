@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/members")
+@RequestMapping(value = "/profiles")
 public class ProfileController {
 
     private final ProfileService profileService;
