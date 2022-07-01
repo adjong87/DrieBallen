@@ -44,6 +44,7 @@ public class PlayedGameService {
                 orElseThrow(() -> new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
         ScoreCard sC =
                 new ScoreCard(p1.getFirstName(), p2.getFirstName(), p1.getAimScore(), p2.getAimScore());
+        sC.setFilledIn(false);
         scoreCardRepository.save(sC);
         PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
         PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);

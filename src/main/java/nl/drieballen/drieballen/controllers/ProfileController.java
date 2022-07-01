@@ -2,6 +2,7 @@ package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.dtos.ProfileInputDto;
+import nl.drieballen.drieballen.dtos.UserDto;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+
+
     @GetMapping("/allUsers")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User>userList;
@@ -36,6 +39,12 @@ public class ProfileController {
         List<ProfileDto> profileDtoList;
         profileDtoList = profileService.getAllProfiles();
         return ResponseEntity.ok().body(profileDtoList);
+    }
+
+    @GetMapping("/getUserData/{username}")
+    public ResponseEntity<UserDto> getUserData(@PathVariable(value = "username") String username){
+        UserDto optionalUser = profileService.getUserData(username);
+        return ResponseEntity.ok().body(optionalUser);
     }
 
     @GetMapping(value = "/profile")

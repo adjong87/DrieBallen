@@ -9,15 +9,15 @@ public class SignupRequest {
     private String username;
 
     @NotBlank
+    @Size(min = 6, max = 40)
+    private String password;
+
+    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
 
     private Set<String> role;
-
-    @NotBlank
-    @Size(min = 6, max = 40)
-    private String password;
 
     @NotBlank
     @Size(min = 1, max = 40)
@@ -29,8 +29,7 @@ public class SignupRequest {
 
     @NotNull
     private int age;
-    @NotNull
-    private char gender;
+
     @NotNull
     private int aimScore;
 
@@ -78,10 +77,6 @@ public class SignupRequest {
         return age;
     }
 
-    public char getGender() {
-        return gender;
-    }
-
     public int getAimScore() {
         return aimScore;
     }
@@ -96,10 +91,6 @@ public class SignupRequest {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
     }
 
     public void setAimScore(int aimScore) {

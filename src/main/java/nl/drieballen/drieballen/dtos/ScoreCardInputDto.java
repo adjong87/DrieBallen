@@ -5,7 +5,6 @@ public class ScoreCardInputDto {
     private int[] playerOneScore;
 
     private int[] playerTwoScore;
-
     private boolean filledIn;
 
     public ScoreCardInputDto(int[] playerOneScore, int[] playerTwoScore) {

@@ -33,17 +33,27 @@ public class ScoreCardService {
         return scoreCardDtoList;
     }
 
+    public ScoreCardDto getFinishedScoreCard(Long id) {
+        ScoreCardDto dto = new ScoreCardDto();
+        Optional<ScoreCard> scoreCard = scoreCardRepository.findByIdAndFilledInIsTrue(id);
+        if (scoreCard.isPresent()) {
+            dto = fromScoreCard(scoreCard.get());
+        } else {
+            throw new RecordNotFoundException("deze scorecard bestaat niet finished");
+        }
+        return dto;
+    }
+
     public ScoreCardDto getScoreCard(Long id) {
         ScoreCardDto dto = new ScoreCardDto();
         Optional<ScoreCard> scoreCard = scoreCardRepository.findById(id);
         if (scoreCard.isPresent()) {
             dto = fromScoreCard(scoreCard.get());
         } else {
-            throw new RecordNotFoundException("deze scorecard bestaat niet");
+            throw new RecordNotFoundException("deze scorecard bestaat niet unfinished");
         }
         return dto;
     }
-
 
     public List<ScoreCardDto> getAllScoreCards() {
         List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();
@@ -65,7 +75,7 @@ public class ScoreCardService {
     }
 
     public ScoreCardDto fillInScore(Long id, ScoreCardInputDto scoreCardInputDto) {
-        ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Scorecard " + id + " doesn't exist"));
+        ScoreCard sc = scoreCardRepository.findByIdAndFilledInIsFalse(id).orElseThrow(() -> new RecordNotFoundException("Wedstrijd nummer: " + id + " is al gespeeld"));
         Objects.requireNonNull(sc).setId(id);
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
         sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());

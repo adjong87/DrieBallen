@@ -6,17 +6,11 @@ public class ProfileInputDto {
 
     private String password;
 
-    private int doB;
-
     private String firstName;
 
     private String lastName;
 
-    private String email;
-
     private int age;
-
-    private char gender;
 
     private int aimScore;
 
@@ -24,10 +18,6 @@ public class ProfileInputDto {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getFirstName() {
@@ -38,20 +28,8 @@ public class ProfileInputDto {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public int getDoB() {
-        return doB;
-    }
-
-    public char getGender() {
-        return gender;
     }
 
     public int getAimScore() {
@@ -77,20 +55,8 @@ public class ProfileInputDto {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setDoB(int doB) {
-        this.doB = doB;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
     }
 
     public void setAimScore(int aimScore) {

@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(value = "/scorecards")
 public class ScoreCardController {
-
+ 
     private final ScoreCardService scoreCardService;
 
     @Autowired
@@ -26,6 +26,12 @@ public class ScoreCardController {
         List<ScoreCardDto>scoreCardDtoList;
         scoreCardDtoList = scoreCardService.getAllNonFilled();
         return ResponseEntity.ok().body(scoreCardDtoList);
+    }
+
+    @GetMapping(value = "/donecard")
+    public ResponseEntity<ScoreCardDto> getFinishedScoreCard(@RequestParam("id") Long id){
+        ScoreCardDto dto = scoreCardService.getFinishedScoreCard(id);
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping("/card")

@@ -2,6 +2,7 @@ package nl.drieballen.drieballen.services;
 
 import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.dtos.ProfileInputDto;
+import nl.drieballen.drieballen.dtos.UserDto;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
@@ -40,9 +41,15 @@ public class ProfileService {
     }
 
     public ProfileDto getProfile(String username) {
-        ProfileDto dto = new ProfileDto();
         Profile profile = profileRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("test"));
-         return dto = fromProfile(profile);
+         return fromProfile(profile);
+    }
+
+
+
+    public UserDto getUserData(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze info is niet beschikbaar"));
+        return fromUser(user);
     }
 
     public ProfileDto changeProfile(ProfileInputDto profileInputDto) {
@@ -56,9 +63,7 @@ public class ProfileService {
         profile.setUsername(profileInputDto.getUsername());
         profile.setFirstName(profileInputDto.getFirstName());
         profile.setLastName(profileInputDto.getLastName());
-        profile.setEmail(profileInputDto.getEmail());
         profile.setAge(profileInputDto.getAge());
-        profile.setGender(profileInputDto.getGender());
         profile.setAimScore(profileInputDto.getAimScore());
         return profile;
     }
@@ -68,13 +73,19 @@ public class ProfileService {
         dto.setUsername(profile.getUsername());
         dto.setFirstName(profile.getFirstName());
         dto.setLastName(profile.getLastName());
-        dto.setEmail(profile.getEmail());
         dto.setAge(profile.getAge());
-        dto.setGender(profile.getGender());
         dto.setAimScore(profile.getAimScore());
         dto.setPlayedGames(profile.getPlayedGames());
         return dto;
     }
+
+    public static UserDto fromUser(User user) {
+        var dto = new UserDto();
+        dto.setUsername(user.getUsername());
+        dto.setRoles(user.getRoles());
+        return dto;
+    }
+
 
     public void deleteProfile(String username) {
         profileRepository.deleteByUsername(username);
