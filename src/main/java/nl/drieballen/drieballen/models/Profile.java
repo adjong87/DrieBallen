@@ -21,6 +21,9 @@ public class Profile {
 
     private int aimScore;
 
+    @OneToOne
+    private PhotoUploadResponse photo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "profile")
     private Collection<PlayedGame> playedGames;
@@ -59,6 +62,10 @@ public class Profile {
         return aimScore;
     }
 
+    public PhotoUploadResponse getPhoto() {
+        return photo;
+    }
+
     @OneToMany
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
@@ -85,6 +92,10 @@ public class Profile {
 
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+
+    public void setPhoto(PhotoUploadResponse photo) {
+        this.photo = photo;
     }
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {

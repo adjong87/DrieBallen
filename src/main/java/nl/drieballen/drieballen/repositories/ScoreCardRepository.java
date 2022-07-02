@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.repositories;
 
+import nl.drieballen.drieballen.models.PlayedGame;
 import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

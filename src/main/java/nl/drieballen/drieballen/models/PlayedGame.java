@@ -1,14 +1,18 @@
 package nl.drieballen.drieballen.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
 
+    @JsonIgnore
     @EmbeddedId
     PlayedGameId id;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("profileUsername")
     @JoinColumn(name = "profile_username")

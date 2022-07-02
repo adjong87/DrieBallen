@@ -37,7 +37,7 @@ public class User {
         private Set<Role> roles = new HashSet<>();
 
         @OneToOne
-        @JoinColumn(name="member_profile")
+        @JoinColumn(name="user_profile")
         private Profile profile;
 
         public User() {
@@ -81,10 +81,10 @@ public class User {
                 this.roles = roles;
         }
 
-        public Profile getMember() {
+        public Profile getProfile() {
                 return profile;
         }
-        public void setMember(Profile profile) {
+        public void setProfile(Profile profile) {
                 this.profile = profile;
         }
 }

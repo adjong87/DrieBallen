@@ -1,11 +1,12 @@
 package nl.drieballen.drieballen.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ScoreCard {
@@ -29,10 +30,11 @@ public class ScoreCard {
 
     private String playerTwoName;
 
-    private int[] playerOneScore;
+    @ElementCollection
+    private List<Integer> playerOneScore;
 
-    private int[] playerTwoScore;
-
+    @ElementCollection
+    private List<Integer> playerTwoScore;
     private int aimScoreP1;
 
     private int aimScoreP2;
@@ -61,11 +63,11 @@ public class ScoreCard {
         return playerTwoName;
     }
 
-    public int[] getPlayerOneScore() {
+    public List<Integer> getPlayerOneScore() {
         return playerOneScore;
     }
 
-    public int[] getPlayerTwoScore() {
+    public List<Integer> getPlayerTwoScore() {
         return playerTwoScore;
     }
 
@@ -100,17 +102,17 @@ public class ScoreCard {
         this.id = id;
     }
 
-    public void setPlayerOneScore(int[] playerOneScore) {
+    public void setPlayerOneScore(List<Integer> playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
 
-    public void setPlayerTwoScore(int[] playerTwoScore) {
+    public void setPlayerTwoScore(List<Integer> playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
-
-    public void setNrOfTurns(int nrOfTurns) {
-        this.nrOfTurns = playerOneScore.length;
-    }
+//
+//    public void setNrOfTurns(int nrOfTurns) {
+//        this.nrOfTurns = playerOneScore.length;
+//    }
 
     public void setGespeeldOp(LocalDate gespeeldOp) {
         this.gespeeldOp = gespeeldOp;

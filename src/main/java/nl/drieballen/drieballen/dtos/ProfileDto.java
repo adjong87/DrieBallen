@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.dtos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.PlayedGame;
 import java.util.Collection;
 
@@ -12,7 +13,8 @@ public class ProfileDto {
     private int age;
     private int aimScore;
 
-    @JsonIgnore
+    private PhotoUploadResponse photo;
+
     private Collection<PlayedGame> playedGames;
 
 
@@ -37,6 +39,7 @@ public class ProfileDto {
     public int getAimScore() {
         return aimScore;
     }
+
 
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
@@ -63,6 +66,9 @@ public class ProfileDto {
 
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+    public void setPhoto(PhotoUploadResponse photo) {
+        this.photo = photo;
     }
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {

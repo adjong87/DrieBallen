@@ -1,5 +1,7 @@
 package nl.drieballen.drieballen.services;
 
+import nl.drieballen.drieballen.dtos.PlayedGameDto;
+import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.PlayedGame;
@@ -10,7 +12,10 @@ import nl.drieballen.drieballen.repositories.PlayedGameRepository;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static nl.drieballen.drieballen.services.ProfileService.fromProfile;
 
 @Service
 public class PlayedGameService {
@@ -32,9 +37,13 @@ public class PlayedGameService {
 //        return playedGameList;
 //    }
 
-    public List<PlayedGame> findPlayedGameById(String username){
-        List<PlayedGame> playedGamesList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCase(username);
-        return playedGamesList;
+    public List<PlayedGameDto> findPlayedGameById(String username){
+        List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
+        List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCase(username);
+        for(PlayedGame playedGame : playedGameList){
+            playedGameDtoList.add(toDto(playedGame));
+        }
+        return playedGameDtoList;
     }
 
     public void createPlayedGame(String playerOne, String playerTwo){
@@ -54,7 +63,12 @@ public class PlayedGameService {
         p2.addPlayedGame(pg2);
         profileRepository.save(p1);
         profileRepository.save(p2);
+    }
 
-
+    public PlayedGameDto toDto(PlayedGame playedGame){
+        PlayedGameDto playedGameDto = new PlayedGameDto();
+        playedGameDto.setScoreCard(playedGame.getScoreCard());
+        playedGameDto.setUitgespeeld(playedGame.isUitgespeeld());
+        return playedGameDto;
     }
 }

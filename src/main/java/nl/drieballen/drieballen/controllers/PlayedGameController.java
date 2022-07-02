@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.controllers;
 
+import nl.drieballen.drieballen.dtos.PlayedGameDto;
 import nl.drieballen.drieballen.models.PlayedGame;
 import nl.drieballen.drieballen.services.PlayedGameService;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,10 @@ public class PlayedGameController {
 //    }
 
     @GetMapping("/find")
-    public ResponseEntity<List<PlayedGame>> getAllPlayedGamesByFirstName(@RequestParam(value = "username") String username){
-        List<PlayedGame> playedGameList;
-        playedGameList = playedGameService.findPlayedGameById(username);
-        return ResponseEntity.ok().body(playedGameList);
+    public ResponseEntity<List<PlayedGameDto>> getAllPlayedGamesByFirstName(@RequestParam(value = "username") String username){
+        List<PlayedGameDto> playedGameDtoList;
+        playedGameDtoList = playedGameService.findPlayedGameById(username);
+        return ResponseEntity.ok().body(playedGameDtoList);
     }
 
     @PostMapping("/createGame")

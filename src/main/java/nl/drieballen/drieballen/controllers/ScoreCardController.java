@@ -28,6 +28,13 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<List<ScoreCardDto>> getAllNonFilled(@RequestParam(value = "username") String username){
+        List<ScoreCardDto>scoreCardDtoList;
+        scoreCardDtoList = scoreCardService.getScoreCardByUsername(username);
+        return ResponseEntity.ok().body(scoreCardDtoList);
+    }
+
     @GetMapping(value = "/donecard")
     public ResponseEntity<ScoreCardDto> getFinishedScoreCard(@RequestParam("id") Long id){
         ScoreCardDto dto = scoreCardService.getFinishedScoreCard(id);

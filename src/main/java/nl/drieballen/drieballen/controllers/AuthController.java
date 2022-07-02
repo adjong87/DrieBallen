@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.controllers;
 
-import nl.drieballen.drieballen.dtos.ProfileDto;
-import nl.drieballen.drieballen.dtos.UserDto;
 import nl.drieballen.drieballen.models.ERole;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.Role;
@@ -96,7 +94,7 @@ public class AuthController {
         Profile profile = new Profile(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getAimScore());
         profileRepository.save(profile);
 
-        user.setMember(profile);
+        user.setProfile(profile);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
