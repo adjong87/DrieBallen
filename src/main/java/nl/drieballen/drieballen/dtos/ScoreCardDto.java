@@ -1,8 +1,6 @@
 package nl.drieballen.drieballen.dtos;
 
-import javax.persistence.ElementCollection;
 import java.time.LocalDate;
-import java.util.List;
 
 public class ScoreCardDto {
 
@@ -12,10 +10,10 @@ public class ScoreCardDto {
 
     private String playerTwoName;
 
-    @ElementCollection
-    private List<Integer> playerOneScore;
-    @ElementCollection
-    private List<Integer> playerTwoScore;
+    private int[] playerOneScore;
+
+    private int[] playerTwoScore;
+
     private int aimScoreP1;
 
     private int aimScoreP2;
@@ -44,11 +42,11 @@ public class ScoreCardDto {
         return playerTwoName;
     }
 
-    public List<Integer> getPlayerOneScore() {
+    public int[] getPlayerOneScore() {
         return playerOneScore;
     }
 
-    public List<Integer> getPlayerTwoScore() {
+    public int[] getPlayerTwoScore() {
         return playerTwoScore;
     }
 
@@ -83,11 +81,11 @@ public class ScoreCardDto {
         this.playerTwoName = playerTwoName;
     }
 
-    public void setPlayerOneScore(List<Integer> playerOneScore) {
+    public void setPlayerOneScore(int[] playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
 
-    public void setPlayerTwoScore(List<Integer> playerTwoScore) {
+    public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
 

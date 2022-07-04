@@ -1,10 +1,10 @@
 package nl.drieballen.drieballen.services;
 
-import nl.drieballen.drieballen.dtos.ProfileDto;
-import nl.drieballen.drieballen.dtos.ProfileInputDto;
-import nl.drieballen.drieballen.dtos.UserDto;
+import nl.drieballen.drieballen.dtos.*;
+import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.Profile;
+import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -53,22 +54,6 @@ public class ProfileService {
     public UserDto getUserData(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze info is niet beschikbaar"));
         return fromUser(user);
-    }
-
-    public ProfileDto changeProfile(ProfileInputDto profileInputDto) {
-        Profile profile = toProfile(profileInputDto);
-        profileRepository.save(profile);
-        return fromProfile(profile);
-    }
-
-    private static Profile toProfile(ProfileInputDto profileInputDto) {
-        var profile = new Profile();
-        profile.setUsername(profileInputDto.getUsername());
-        profile.setFirstName(profileInputDto.getFirstName());
-        profile.setLastName(profileInputDto.getLastName());
-        profile.setAge(profileInputDto.getAge());
-        profile.setAimScore(profileInputDto.getAimScore());
-        return profile;
     }
 
     public static ProfileDto fromProfile(Profile profile) {

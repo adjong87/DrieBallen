@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/playedGame")
+@RequestMapping("/playedgame")
 public class PlayedGameController {
 
     private final PlayedGameService playedGameService;
@@ -28,14 +28,15 @@ public class PlayedGameController {
 //    }
 
     @GetMapping("/find")
-    public ResponseEntity<List<PlayedGameDto>> getAllPlayedGamesByFirstName(@RequestParam(value = "username") String username){
+    public ResponseEntity<List<PlayedGameDto>> getAllPlayedGamesByUsername(@RequestParam(value = "username") String username){
         List<PlayedGameDto> playedGameDtoList;
         playedGameDtoList = playedGameService.findPlayedGameById(username);
         return ResponseEntity.ok().body(playedGameDtoList);
     }
 
     @PostMapping("/createGame")
-    public void createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo) {
+    public String createPlayedGame(@RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo) {
         playedGameService.createPlayedGame(playerOne, playerTwo);
+        return "game created";
     }
 }

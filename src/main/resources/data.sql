@@ -21,9 +21,9 @@ INSERT INTO users (username, password, email, user_profile) VALUES('hermand','$2
 INSERT INTO users (username, password, email, user_profile) VALUES('jan','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'jandekale@gmail.com', 'jan');
 
 INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 1);
--- INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 3);
+ INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 2);
 
--- INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 3);
+INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 3);
 INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 2);
 INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 3);
@@ -34,7 +34,7 @@ INSERT INTO user_roles (user_username, role_id) VALUES('hermans', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('john', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('jan', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('hermand', 1);
---
+--*/
 -- INSERT INTO score_card(id, aim_scorep1, aim_scorep2, filled_in, gespeeld_Op, nr_of_turns, player_one_name, player_one_score, player_two_name, player_two_score) VALUES (33, 27, 38, false, '2022-07-01', 24, 'Arjen', '{'0','1','2','1','0','0','0','2','1','0','0','5','1','1','2','0','0','2','2','0','0','3','2','2'}', 'Herman', '{'0','1','2','1','0','0','0','2','1','0','0','5','1','1','2','0','0','2','2','0','0','3','2','2'}');
 -- INSERT INTO score_card(id, aim_scorep1, aim_scorep2, filled_in, gespeeld_Op, nr_of_turns, player_one_name, player_one_score, player_two_name, player_two_score) VALUES (34, 41, 16, true, '2022-07-01', 26, 'Jeanneau','{3,1,5,1,0,0,0,3,0,2,1,7,0,1,1,1,2,5,0,2,2,0,0,1,1}', 'Geeske', '{0,1,0,1,0,0,0,2,1,0,0,1,1,1,0,0,2,0,0,2,2,0,0,1,1}');
 -- INSERT INTO score_card(id, aim_scorep1, aim_scorep2, filled_in, gespeeld_Op, nr_of_turns, player_one_name, player_one_score, player_two_name, player_two_score) VALUES (35, 35, 38, true, '2022-07-01', 25, 'John', '{3,1,5,1,0,0,0,3,0,2,1,5,0,1,1,1,2,5,0,2,0,0,0,1,1}', 'Herman S', '{0,1,2,1,0,0,0,3,0,2,1,4,0,1,1,1,2,3,0,2,2,0,0,1,1}');

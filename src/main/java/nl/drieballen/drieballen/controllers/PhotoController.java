@@ -2,6 +2,7 @@ package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.services.PhotoService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/photos")
+@RequestMapping(value = "")
 public class PhotoController {
 
     private final PhotoService photoservice;
@@ -26,21 +27,21 @@ public class PhotoController {
     }
 
     @PostMapping("/upload")
-    PhotoUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
+    PhotoUploadResponse photoUpload(@RequestParam("file") @NotNull MultipartFile file){
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
         String contentType = file.getContentType();
-        String fileName = photoservice.storeFile(file, url);
+        String fileName = photoservice.storePhoto(file, url);
 
 
         return new PhotoUploadResponse(fileName, contentType, url );
     }
 
     @GetMapping("/download/{fileName}")
-    ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
+    ResponseEntity<Resource> downloadPhoto(@PathVariable String fileName, HttpServletRequest request) {
 
-        Resource resource = photoservice.downLoadFile(fileName);
+        Resource resource = photoservice.downloadPhoto(fileName);
 
 //        this mediaType decides witch type you accept if you only accept 1 type
 //        MediaType contentType = MediaType.IMAGE_JPEG;

@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static nl.drieballen.drieballen.services.ProfileService.fromProfile;
-
 @Service
 public class PlayedGameService {
 
@@ -57,8 +55,6 @@ public class PlayedGameService {
         scoreCardRepository.save(sC);
         PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
         PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);
-        playedGameRepository.save(pg1);
-        playedGameRepository.save(pg2);
         p1.addPlayedGame(pg1);
         p2.addPlayedGame(pg2);
         profileRepository.save(p1);

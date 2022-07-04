@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
+    List<ScoreCard> findScoreCardsByPlayedGamesContainingIgnoreCase(String username);
+
 
     List<ScoreCard> findScoreCardByFilledInIs(boolean b);
 

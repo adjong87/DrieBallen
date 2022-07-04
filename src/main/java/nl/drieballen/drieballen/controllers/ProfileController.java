@@ -28,15 +28,12 @@ public class ProfileController {
         this.photoController = photoController;
     }
 
-
-
     @GetMapping("/allUsers")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User>userList;
         userList = profileService.getAllUsers();
         return ResponseEntity.ok().body(userList);
     }
-
 
     @GetMapping("/all")
     public ResponseEntity<List<ProfileDto>> getAllProfiles(){
@@ -57,14 +54,10 @@ public class ProfileController {
         return ResponseEntity.ok().body(optionalProfile);
     }
 
-    @PutMapping(value="/change")
-    public ProfileDto addProfile(@RequestBody ProfileInputDto profileInputDto){
-        return profileService.changeProfile(profileInputDto);
-    }
 
     @PostMapping("/{username}/photo")
     public void assignPhotoToProfile(@PathVariable("username") String username, @RequestBody MultipartFile file){
-        PhotoUploadResponse photo = photoController.singleFileUpload(file);
+        PhotoUploadResponse photo = photoController.photoUpload(file);
         profileService.assignPhotoToProfile(photo.getFileName(), username);
     }
 

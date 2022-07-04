@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class ScoreCard {
@@ -30,11 +28,9 @@ public class ScoreCard {
 
     private String playerTwoName;
 
-    @ElementCollection
-    private List<Integer> playerOneScore;
+    private int[] playerOneScore;
 
-    @ElementCollection
-    private List<Integer> playerTwoScore;
+    private int[] playerTwoScore;
     private int aimScoreP1;
 
     private int aimScoreP2;
@@ -44,7 +40,7 @@ public class ScoreCard {
     private LocalDate gespeeldOp = LocalDate.now();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "scoreCard")
+    @OneToMany(mappedBy = "scoreCard", cascade = CascadeType.ALL)
     private Collection<PlayedGame> playedGames;
 
     private boolean filledIn;
@@ -63,11 +59,11 @@ public class ScoreCard {
         return playerTwoName;
     }
 
-    public List<Integer> getPlayerOneScore() {
+    public int[] getPlayerOneScore() {
         return playerOneScore;
     }
 
-    public List<Integer> getPlayerTwoScore() {
+    public int[] getPlayerTwoScore() {
         return playerTwoScore;
     }
 
@@ -102,17 +98,34 @@ public class ScoreCard {
         this.id = id;
     }
 
-    public void setPlayerOneScore(List<Integer> playerOneScore) {
+    public void setPlayerOneName(String playerOneName) {
+        this.playerOneName = playerOneName;
+    }
+
+    public void setPlayerTwoName(String playerTwoName) {
+        this.playerTwoName = playerTwoName;
+    }
+
+    public void setPlayerOneScore(int[] playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
 
-    public void setPlayerTwoScore(List<Integer> playerTwoScore) {
+    public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
-//
-//    public void setNrOfTurns(int nrOfTurns) {
-//        this.nrOfTurns = playerOneScore.length;
-//    }
+
+    public void setAimScoreP1(int aimScoreP1) {
+        this.aimScoreP1 = aimScoreP1;
+    }
+
+    public void setAimScoreP2(int aimScoreP2) {
+        this.aimScoreP2 = aimScoreP2;
+    }
+
+
+    public void setNrOfTurns(int nrOfTurns) {
+        this.nrOfTurns = playerOneScore.length;
+    }
 
     public void setGespeeldOp(LocalDate gespeeldOp) {
         this.gespeeldOp = gespeeldOp;

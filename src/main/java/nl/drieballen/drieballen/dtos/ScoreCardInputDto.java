@@ -5,35 +5,30 @@ import java.util.List;
 
 public class ScoreCardInputDto {
 
-    @ElementCollection
-    private List<Integer> playerOneScore;
-    @ElementCollection
-    private List<Integer> playerTwoScore;
-    private boolean filledIn;
+private int[] playerOneScore;
 
-    public ScoreCardInputDto(List<Integer> playerOneScore, List<Integer> playerTwoScore) {
+    private int[] playerTwoScore;
+
+    public ScoreCardInputDto(int[] playerOneScore, int[] playerTwoScore) {
         this.playerOneScore = playerOneScore;
         this.playerTwoScore = playerTwoScore;
     }
 
-    public List<Integer> getPlayerOneScore() {
+    public int[] getPlayerOneScore() {
         return playerOneScore;
     }
 
-    public List<Integer> getPlayerTwoScore() {
+    public int[] getPlayerTwoScore() {
         return playerTwoScore;
     }
 
-    public void setPlayerOneScore(List<Integer> playerOneScore) {
+    public void setPlayerOneScore(int[] playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
 
-    public void setPlayerTwoScore(List<Integer> playerTwoScore) {
+    public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
 
-    public boolean isFilledIn() {
-        return filledIn;
-    }
 }
 

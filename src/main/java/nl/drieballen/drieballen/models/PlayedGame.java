@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
-
     @JsonIgnore
     @EmbeddedId
     PlayedGameId id;

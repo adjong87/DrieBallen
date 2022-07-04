@@ -38,11 +38,11 @@ public class PhotoService {
 
     }
 
-    public String storeFile(MultipartFile file, String url) {
+    public String storePhoto(MultipartFile file, String url) {
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        Path filePath = Paths.get(fileStoragePath + "\\" + fileName);
+        Path filePath = Paths.get(fileStoragePath + "/" + fileName);
 
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
@@ -53,7 +53,7 @@ public class PhotoService {
         return fileName;
     }
 
-    public Resource downLoadFile(String fileName) {
+    public Resource downloadPhoto(String fileName) {
 
         Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(fileName);
 
@@ -68,7 +68,7 @@ public class PhotoService {
         if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {
-            throw new RuntimeException("the file doesn't exist or not readable");
+            throw new RuntimeException("This file doesn't exist or not readable");
         }
     }
 

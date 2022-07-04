@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
 //                .antMatchers("/api/auth/signUp").hasRole("ADMIN")
-                .antMatchers("/photos/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
+                .antMatchers("/download/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
                 .antMatchers("/profiles/getUserData").hasAnyRole("ADMIN", "MODERATOR", "USER")
                 .antMatchers("/profiles/profile").hasAnyRole("ADMIN", "MODERATOR", "USER")
                 .antMatchers("/profiles/**").hasRole("ADMIN")

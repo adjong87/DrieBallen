@@ -9,4 +9,5 @@ public interface PhotoUploadRepository extends JpaRepository<PhotoUploadResponse
 
     Optional<PhotoUploadResponse> findByFileName(String fileName);
 
+
 }

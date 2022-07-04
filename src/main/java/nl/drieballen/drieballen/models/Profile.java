@@ -25,7 +25,7 @@ public class Profile {
     private PhotoUploadResponse photo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private Collection<PlayedGame> playedGames;
 
     public Profile(String username, String firstName, String lastName, int age, int aimScore) {

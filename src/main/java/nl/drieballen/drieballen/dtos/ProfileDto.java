@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.dtos;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.PlayedGame;
 import java.util.Collection;
@@ -40,6 +39,9 @@ public class ProfileDto {
         return aimScore;
     }
 
+    public PhotoUploadResponse getPhoto() {
+        return photo;
+    }
 
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
