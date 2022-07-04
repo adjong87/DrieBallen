@@ -1,5 +1,7 @@
 package nl.drieballen.drieballen.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,8 +38,9 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
         private Set<Role> roles = new HashSet<>();
 
+        @JsonIgnore
         @OneToOne
-        @JoinColumn(name="member_profile")
+        @JoinColumn(name="user_profile")
         private Profile profile;
 
         public User() {
@@ -81,10 +84,10 @@ public class User {
                 this.roles = roles;
         }
 
-        public Profile getMember() {
+        public Profile getProfile() {
                 return profile;
         }
-        public void setMember(Profile profile) {
+        public void setProfile(Profile profile) {
                 this.profile = profile;
         }
 }

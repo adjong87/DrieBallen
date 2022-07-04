@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.dtos;
+import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.PlayedGame;
 import java.util.Collection;
 
@@ -8,14 +9,10 @@ public class ProfileDto {
     private String firstName;
 
     private String lastName;
-
-    private String email;
-
     private int age;
-
-    private char gender;
-
     private int aimScore;
+
+    private PhotoUploadResponse photo;
 
     private Collection<PlayedGame> playedGames;
 
@@ -34,20 +31,16 @@ public class ProfileDto {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public int getAge() {
         return age;
     }
 
-    public char getGender() {
-        return gender;
-    }
-
     public int getAimScore() {
         return aimScore;
+    }
+
+    public PhotoUploadResponse getPhoto() {
+        return photo;
     }
 
     public Collection<PlayedGame> getPlayedGames() {
@@ -69,20 +62,15 @@ public class ProfileDto {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setAge(int age) {
         this.age = age;
     }
 
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+    public void setPhoto(PhotoUploadResponse photo) {
+        this.photo = photo;
     }
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {

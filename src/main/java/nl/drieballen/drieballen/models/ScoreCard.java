@@ -21,7 +21,7 @@ public class ScoreCard {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String playerOneName;
@@ -31,7 +31,6 @@ public class ScoreCard {
     private int[] playerOneScore;
 
     private int[] playerTwoScore;
-
     private int aimScoreP1;
 
     private int aimScoreP2;
@@ -41,7 +40,7 @@ public class ScoreCard {
     private LocalDate gespeeldOp = LocalDate.now();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "scoreCard")
+    @OneToMany(mappedBy = "scoreCard", cascade = CascadeType.ALL)
     private Collection<PlayedGame> playedGames;
 
     private boolean filledIn;
@@ -99,6 +98,14 @@ public class ScoreCard {
         this.id = id;
     }
 
+    public void setPlayerOneName(String playerOneName) {
+        this.playerOneName = playerOneName;
+    }
+
+    public void setPlayerTwoName(String playerTwoName) {
+        this.playerTwoName = playerTwoName;
+    }
+
     public void setPlayerOneScore(int[] playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
@@ -106,6 +113,15 @@ public class ScoreCard {
     public void setPlayerTwoScore(int[] playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
+
+    public void setAimScoreP1(int aimScoreP1) {
+        this.aimScoreP1 = aimScoreP1;
+    }
+
+    public void setAimScoreP2(int aimScoreP2) {
+        this.aimScoreP2 = aimScoreP2;
+    }
+
 
     public void setNrOfTurns(int nrOfTurns) {
         this.nrOfTurns = playerOneScore.length;

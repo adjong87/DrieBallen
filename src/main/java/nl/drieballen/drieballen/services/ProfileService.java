@@ -1,9 +1,12 @@
 package nl.drieballen.drieballen.services;
 
-import nl.drieballen.drieballen.dtos.ProfileDto;
-import nl.drieballen.drieballen.dtos.ProfileInputDto;
+import nl.drieballen.drieballen.dtos.*;
+import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
+import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.Profile;
+import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.models.User;
+import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,14 +25,16 @@ public class ProfileService {
 
     private final UserRepository userRepository;
 
-    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository) {
+    private final PhotoUploadRepository photoUploadRepository;
+
+    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository, PhotoUploadRepository photoUploadRepository) {
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
+        this.photoUploadRepository = photoUploadRepository;
     }
 
     public List<User> getAllUsers(){
-        List<User>userList = userRepository.findAll();
-        return userList;
+        return userRepository.findAll();
     }
 
     public List<ProfileDto> getAllProfiles(){
@@ -40,27 +47,13 @@ public class ProfileService {
     }
 
     public ProfileDto getProfile(String username) {
-        ProfileDto dto = new ProfileDto();
         Profile profile = profileRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("test"));
-         return dto = fromProfile(profile);
+         return fromProfile(profile);
     }
 
-    public ProfileDto changeProfile(ProfileInputDto profileInputDto) {
-        Profile profile = toProfile(profileInputDto);
-        profileRepository.save(profile);
-        return fromProfile(profile);
-    }
-
-    private static Profile toProfile(ProfileInputDto profileInputDto) {
-        var profile = new Profile();
-        profile.setUsername(profileInputDto.getUsername());
-        profile.setFirstName(profileInputDto.getFirstName());
-        profile.setLastName(profileInputDto.getLastName());
-        profile.setEmail(profileInputDto.getEmail());
-        profile.setAge(profileInputDto.getAge());
-        profile.setGender(profileInputDto.getGender());
-        profile.setAimScore(profileInputDto.getAimScore());
-        return profile;
+    public UserDto getUserData(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze info is niet beschikbaar"));
+        return fromUser(user);
     }
 
     public static ProfileDto fromProfile(Profile profile) {
@@ -68,15 +61,33 @@ public class ProfileService {
         dto.setUsername(profile.getUsername());
         dto.setFirstName(profile.getFirstName());
         dto.setLastName(profile.getLastName());
-        dto.setEmail(profile.getEmail());
         dto.setAge(profile.getAge());
-        dto.setGender(profile.getGender());
         dto.setAimScore(profile.getAimScore());
+        dto.setPhoto(profile.getPhoto());
         dto.setPlayedGames(profile.getPlayedGames());
         return dto;
     }
 
+    public static UserDto fromUser(User user) {
+        var dto = new UserDto();
+        dto.setUsername(user.getUsername());
+        dto.setRoles(user.getRoles());
+        return dto;
+    }
+
     public void deleteProfile(String username) {
+        userRepository.deleteByUsername(username);
         profileRepository.deleteByUsername(username);
+    }
+
+    public void assignPhotoToProfile(String fileName, String username){
+        Optional<Profile> optionalProfile = profileRepository.findByUsername(username);
+        Optional<PhotoUploadResponse> photoUploadResponse = photoUploadRepository.findByFileName(fileName);
+        if(optionalProfile.isPresent() && photoUploadResponse.isPresent()){
+            PhotoUploadResponse photo = photoUploadResponse.get();
+            Profile profile = optionalProfile.get();
+            profile.setPhoto(photo);
+            profileRepository.save(profile);
+        }
     }
 }

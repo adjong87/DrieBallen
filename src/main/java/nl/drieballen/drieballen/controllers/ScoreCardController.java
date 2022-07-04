@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(value = "/scorecards")
 public class ScoreCardController {
-
+ 
     private final ScoreCardService scoreCardService;
 
     @Autowired
@@ -28,20 +28,27 @@ public class ScoreCardController {
         return ResponseEntity.ok().body(scoreCardDtoList);
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<List<ScoreCardDto>> getAllNonFilled(@RequestParam(value = "username") String username){
+        List<ScoreCardDto>scoreCardDtoList;
+        scoreCardDtoList = scoreCardService.getScoreCardByUsername(username);
+        return ResponseEntity.ok().body(scoreCardDtoList);
+    }
+
+    @GetMapping(value = "/donecard")
+    public ResponseEntity<ScoreCardDto> getFinishedScoreCard(@RequestParam("id") Long id){
+        ScoreCardDto dto = scoreCardService.getFinishedScoreCard(id);
+        return ResponseEntity.ok().body(dto);
+    }
+
     @GetMapping("/card")
     public ResponseEntity<ScoreCardDto> getScoreCard(@RequestParam("id") Long id){
         ScoreCardDto dto = scoreCardService.getScoreCard(id);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/correct")
-    public ScoreCardDto correctScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
-        ScoreCardDto dto = scoreCardService.correctScore(id, scoreCardInputDto);
-        return dto;
-    }
-
     @PutMapping("/fill")
-    public ScoreCardDto fillInScore(@RequestParam(value = "scoreCardNumber") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
+    public ScoreCardDto fillInScore(@RequestParam(value = "id") Long id, @RequestBody ScoreCardInputDto scoreCardInputDto){
         return scoreCardService.fillInScore(id, scoreCardInputDto);
     }
 

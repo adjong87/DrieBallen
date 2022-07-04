@@ -1,14 +1,17 @@
 package nl.drieballen.drieballen.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
 public class PlayedGame {
-
+    @JsonIgnore
     @EmbeddedId
     PlayedGameId id;
 
+    @JsonIgnore
     @ManyToOne
     @MapsId("profileUsername")
     @JoinColumn(name = "profile_username")
@@ -30,24 +33,19 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
-    public PlayedGame(Profile profile, ScoreCard scoreCard) {
-        this.profile = profile;
-        this.scoreCard = scoreCard;
-    }
-
-    public void determineWin() {
-        if (profile.getFirstName() == scoreCard.getPlayerOneName()) {
-            if (Arrays.stream(scoreCard.getPlayerOneScore()).sum() > profile.getAimScore()) {
-                uitgespeeld = true;
-            } else uitgespeeld = false;
-        }
-        {
-            if (Arrays.stream(scoreCard.getPlayerTwoScore()).sum() > profile.getAimScore()) {
-                uitgespeeld = true;
-            }
-            else uitgespeeld = false;
-        }
-    }
+//    public void determineWin() {
+//        if (profile.getFirstName() == scoreCard.getPlayerOneName()) {
+//            if (Arrays.stream(scoreCard.getPlayerOneScore()).sum() > profile.getAimScore()) {
+//                uitgespeeld = true;
+//            } else uitgespeeld = false;
+//        }
+//        {
+//            if (Arrays.stream(scoreCard.getPlayerTwoScore()).sum() > profile.getAimScore()) {
+//                uitgespeeld = true;
+//            }
+//            else uitgespeeld = false;
+//        }
+//    }
 
 
     public PlayedGameId getId() {

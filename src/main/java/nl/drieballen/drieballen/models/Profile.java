@@ -17,25 +17,22 @@ public class Profile {
 
     private String lastName;
 
-    private String email;
-
     private int age;
-
-    private char gender;
 
     private int aimScore;
 
+    @OneToOne
+    private PhotoUploadResponse photo;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private Collection<PlayedGame> playedGames;
 
-    public Profile(String username, String firstName, String lastName, String email, int age, char gender, int aimScore) {
+    public Profile(String username, String firstName, String lastName, int age, int aimScore) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.age = age;
-        this.gender = gender;
         this.aimScore = aimScore;
     }
 
@@ -57,20 +54,16 @@ public class Profile {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public int getAge() {
         return age;
     }
 
-    public char getGender() {
-        return gender;
-    }
-
     public int getAimScore() {
         return aimScore;
+    }
+
+    public PhotoUploadResponse getPhoto() {
+        return photo;
     }
 
     @OneToMany
@@ -93,20 +86,16 @@ public class Profile {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setAge(int age) {
         this.age = age;
     }
 
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+
+    public void setPhoto(PhotoUploadResponse photo) {
+        this.photo = photo;
     }
 
     public void setPlayedGames(Collection<PlayedGame> playedGames) {

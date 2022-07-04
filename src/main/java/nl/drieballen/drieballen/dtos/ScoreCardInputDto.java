@@ -1,12 +1,13 @@
 package nl.drieballen.drieballen.dtos;
 
+import javax.persistence.ElementCollection;
+import java.util.List;
+
 public class ScoreCardInputDto {
 
-    private int[] playerOneScore;
+private int[] playerOneScore;
 
     private int[] playerTwoScore;
-
-    private boolean filledIn;
 
     public ScoreCardInputDto(int[] playerOneScore, int[] playerTwoScore) {
         this.playerOneScore = playerOneScore;
@@ -21,8 +22,13 @@ public class ScoreCardInputDto {
         return playerTwoScore;
     }
 
-    public boolean isFilledIn() {
-        return filledIn;
+    public void setPlayerOneScore(int[] playerOneScore) {
+        this.playerOneScore = playerOneScore;
     }
+
+    public void setPlayerTwoScore(int[] playerTwoScore) {
+        this.playerTwoScore = playerTwoScore;
+    }
+
 }
 
