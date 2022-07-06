@@ -1,7 +1,10 @@
 package nl.drieballen.drieballen.services;
 
+import nl.drieballen.drieballen.models.Profile;
+import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
+import nl.drieballen.drieballen.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PhotoService {
@@ -24,11 +28,14 @@ public class PhotoService {
     private final String fileStorageLocation;
     private final PhotoUploadRepository photoUploadRepository;
 
-    public PhotoService(@Value("${my.upload_location}") String fileStorageLocation, PhotoUploadRepository photoUploadRepository) {
+    private final ProfileRepository profileRepository;
+
+    public PhotoService(@Value("${my.upload_location}") String fileStorageLocation, PhotoUploadRepository photoUploadRepository, ProfileRepository profileRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
         this.fileStorageLocation = fileStorageLocation;
         this.photoUploadRepository = photoUploadRepository;
+        this.profileRepository = profileRepository;
 
         try {
             Files.createDirectories(fileStoragePath);
@@ -38,33 +45,27 @@ public class PhotoService {
 
     }
 
-    public String storePhoto(MultipartFile file, String url) {
-
+    public PhotoUploadResponse uploadPhoto(MultipartFile file, String url) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-
-        Path filePath = Paths.get(fileStoragePath + "/" + fileName);
-
+        Path filePath = Paths.get(fileStoragePath + "\\" + fileName);
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException("Issue in storing the file", e);
         }
-        photoUploadRepository.save(new PhotoUploadResponse(fileName, file.getContentType(), url));
-        return fileName;
+        PhotoUploadResponse photo = new PhotoUploadResponse(fileName, file.getContentType(), url);
+        photoUploadRepository.save(photo);
+        return photo;
     }
 
     public Resource downloadPhoto(String fileName) {
-
         Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(fileName);
-
         Resource resource;
-
         try {
             resource = new UrlResource(path.toUri());
         } catch (MalformedURLException e) {
             throw new RuntimeException("Issue in reading the file", e);
         }
-
         if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {
@@ -72,6 +73,14 @@ public class PhotoService {
         }
     }
 
+    public String deletePhoto(String username) {
+        Profile profile = profileRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze gebruiker bestaat niet"));
+        String filename = profile.getPhoto().getFileName();
+        profile.setPhoto(null);
+        photoUploadRepository.deleteById(filename);
+        profileRepository.save(profile);
+        return filename;
+    }
 }
 
 

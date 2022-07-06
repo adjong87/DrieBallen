@@ -9,7 +9,7 @@ INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('h
 INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('jeanneau', 'Jeanneau', 'de Naamloze',  74, 41);
 INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('john', 'John', 'de Man', 66, 35);
 INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('hermand', 'Herman', 'Driessen', 86, 18);
-INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('jan', 'Jan', 'de Kale', 70, 44);
+INSERT INTO profiles (username, first_name, last_name, age, aim_score) VALUES('pieterpost', 'Pieter', 'Post', 70, 44);
 
 INSERT INTO users (username, password, email, user_profile) VALUES('gbies','$2a$10$YwckUKeTAp1NvN4qozRSDOkXMoIKV3RHjwdox540CV9oh.DRNMZqi', 'g.bies@fryslan.nl', 'gbies');
 INSERT INTO users (username, password, email, user_profile) VALUES('adjong87','$2a$10$kyVFisSyoq4y1aFiw1FIueBC3dNqDGltTDyNXWOe3bjkx.A72CA4W', 'adjong87@gmail.com', 'adjong87');
@@ -18,7 +18,7 @@ INSERT INTO users (username, password, email, user_profile) VALUES('jeanneau','$
 INSERT INTO users (username, password, email, user_profile) VALUES('hermans','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'hermanengreetschaapherder@gmail.com', 'hermans');
 INSERT INTO users (username, password, email, user_profile) VALUES('john','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'johndeman@gmail.com', 'john');
 INSERT INTO users (username, password, email, user_profile) VALUES('hermand','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'hermandriessen@gmail.com', 'hermand');
-INSERT INTO users (username, password, email, user_profile) VALUES('jan','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'jandekale@gmail.com', 'jan');
+INSERT INTO users (username, password, email, user_profile) VALUES('pieterpost','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'pieterpost@dummy.com', 'pieterpost');
 
 INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 1);
  INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 2);
@@ -32,7 +32,10 @@ INSERT INTO user_roles (user_username, role_id) VALUES('kslabikova', 2);
 INSERT INTO user_roles (user_username, role_id) VALUES('jeanneau', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('hermans', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('john', 1);
-INSERT INTO user_roles (user_username, role_id) VALUES('jan', 1);
+
+INSERT INTO user_roles (user_username, role_id) VALUES('pieterpost', 1);
+INSERT INTO user_roles (user_username, role_id) VALUES('pieterpost', 3);
+
 INSERT INTO user_roles (user_username, role_id) VALUES('hermand', 1);
 --*/
 -- INSERT INTO score_card(id, aim_scorep1, aim_scorep2, filled_in, gespeeld_Op, nr_of_turns, player_one_name, player_one_score, player_two_name, player_two_score) VALUES (33, 27, 38, false, '2022-07-01', 24, 'Arjen', '{'0','1','2','1','0','0','0','2','1','0','0','5','1','1','2','0','0','2','2','0','0','3','2','2'}', 'Herman', '{'0','1','2','1','0','0','0','2','1','0','0','5','1','1','2','0','0','2','2','0','0','3','2','2'}');

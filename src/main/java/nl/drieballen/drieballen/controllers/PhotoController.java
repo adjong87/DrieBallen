@@ -2,6 +2,7 @@ package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.services.PhotoService;
+import nl.drieballen.drieballen.services.ProfileService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,30 +23,23 @@ public class PhotoController {
 
     private final PhotoService photoservice;
 
-    public PhotoController(PhotoService photoservice) {
+    private final ProfileService profileService;
+
+    public PhotoController(PhotoService photoservice, ProfileService profileService) {
         this.photoservice = photoservice;
+        this.profileService = profileService;
     }
 
-    @PostMapping("/upload")
-    PhotoUploadResponse photoUpload(@RequestParam("file") @NotNull MultipartFile file){
-
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
+    @PostMapping("/upload/{username}/photo")
+    public void uploadPhoto(@PathVariable("username") String username, @RequestBody MultipartFile file){
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
-        String contentType = file.getContentType();
-        String fileName = photoservice.storePhoto(file, url);
-
-
-        return new PhotoUploadResponse(fileName, contentType, url );
+        PhotoUploadResponse photo = photoservice.uploadPhoto(file, url);
+        profileService.assignPhotoToProfile(photo.getFileName(), username);
     }
 
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downloadPhoto(@PathVariable String fileName, HttpServletRequest request) {
-
         Resource resource = photoservice.downloadPhoto(fileName);
-
-//        this mediaType decides witch type you accept if you only accept 1 type
-//        MediaType contentType = MediaType.IMAGE_JPEG;
-//        this is going to accept multiple types
         String mimeType;
 
         try{
@@ -53,11 +47,13 @@ public class PhotoController {
         } catch (IOException e) {
             mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
         }
-
-//        for download attachment use next line
-//        return ResponseEntity.ok().contentType(contentType).header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + resource.getFilename()).body(resource);
-//        for showing image in browser
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
+    }
+
+    @DeleteMapping(value = "/delete/{username}/photo")
+    public String deletePhoto(@PathVariable("username") String username) {
+        photoservice.deletePhoto(username);
+        return "Foto is verwijderd";
     }
 
 }

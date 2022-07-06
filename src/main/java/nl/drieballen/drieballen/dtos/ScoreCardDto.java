@@ -18,6 +18,10 @@ public class ScoreCardDto {
 
     private int aimScoreP2;
 
+    private int remainderP1;
+
+    private int remainderP2;
+
     private int nrOfTurns;
 
     private LocalDate gespeeldOp;
@@ -58,6 +62,14 @@ public class ScoreCardDto {
         return aimScoreP2;
     }
 
+    public int getRemainderP1() {
+        return remainderP1;
+    }
+
+    public int getRemainderP2() {
+        return remainderP2;
+    }
+
     public int getNrOfTurns() {
         return nrOfTurns;
     }
@@ -95,6 +107,14 @@ public class ScoreCardDto {
 
     public void setAimScoreP2(int aimScoreP2) {
         this.aimScoreP2 = aimScoreP2;
+    }
+
+    public void setRemainderP1(int remainderP1) {
+        this.remainderP1 = remainderP1;
+    }
+
+    public void setRemainderP2(int remainderP2) {
+        this.remainderP2 = remainderP2;
     }
 
     public void setNrOfTurns(int nrOfTurns) {

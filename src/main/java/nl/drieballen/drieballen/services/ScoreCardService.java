@@ -88,6 +88,8 @@ public class ScoreCardService {
         Objects.requireNonNull(sc).setId(id);
         sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
         sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
+        sc.setRemainderP1(scoreCardInputDto.getRemainderP1());
+        sc.setRemainderP2(scoreCardInputDto.getRemainderP2());
         sc.setFilledIn(true);
         scoreCardRepository.save(sc);
         return fromScoreCard(sc);
@@ -106,6 +108,8 @@ public class ScoreCardService {
         dto.setPlayerTwoScore(scoreCard.getPlayerTwoScore());
         dto.setAimScoreP1(scoreCard.getAimScoreP1());
         dto.setAimScoreP2(scoreCard.getAimScoreP2());
+        dto.setRemainderP1(scoreCard.getRemainderP1());
+        dto.setRemainderP2(scoreCard.getRemainderP2());
         dto.setNrOfTurns(scoreCard.getNrOfTurns());
         dto.setGespeeldOp(scoreCard.getGespeeldOp());
         return dto;

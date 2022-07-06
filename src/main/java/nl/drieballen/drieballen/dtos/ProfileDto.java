@@ -11,7 +11,6 @@ public class ProfileDto {
     private String lastName;
     private int age;
     private int aimScore;
-
     private PhotoUploadResponse photo;
 
     private Collection<PlayedGame> playedGames;

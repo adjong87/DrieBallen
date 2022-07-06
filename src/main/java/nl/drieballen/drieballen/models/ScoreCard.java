@@ -35,6 +35,10 @@ public class ScoreCard {
 
     private int aimScoreP2;
 
+    private int remainderP1;
+
+    private int remainderP2;
+
     private int nrOfTurns;
 
     private LocalDate gespeeldOp = LocalDate.now();
@@ -73,6 +77,14 @@ public class ScoreCard {
 
     public int getAimScoreP2() {
         return aimScoreP2;
+    }
+
+    public int getRemainderP1() {
+        return remainderP1;
+    }
+
+    public int getRemainderP2() {
+        return remainderP2;
     }
 
     public int getNrOfTurns() {
@@ -122,6 +134,13 @@ public class ScoreCard {
         this.aimScoreP2 = aimScoreP2;
     }
 
+    public void setRemainderP1(int remainderP1) {
+        this.remainderP1 = remainderP1;
+    }
+
+    public void setRemainderP2(int remainderP2) {
+        this.remainderP2 = remainderP2;
+    }
 
     public void setNrOfTurns(int nrOfTurns) {
         this.nrOfTurns = playerOneScore.length;

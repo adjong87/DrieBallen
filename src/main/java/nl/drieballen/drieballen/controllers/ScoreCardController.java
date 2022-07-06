@@ -29,7 +29,7 @@ public class ScoreCardController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<List<ScoreCardDto>> getAllNonFilled(@RequestParam(value = "username") String username){
+    public ResponseEntity<List<ScoreCardDto>> getScoreCardByUsername(@RequestParam(value = "username") String username){
         List<ScoreCardDto>scoreCardDtoList;
         scoreCardDtoList = scoreCardService.getScoreCardByUsername(username);
         return ResponseEntity.ok().body(scoreCardDtoList);

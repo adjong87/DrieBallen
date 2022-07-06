@@ -1,15 +1,11 @@
 package nl.drieballen.drieballen.controllers;
 
 import nl.drieballen.drieballen.dtos.ProfileDto;
-import nl.drieballen.drieballen.dtos.ProfileInputDto;
 import nl.drieballen.drieballen.dtos.UserDto;
-import nl.drieballen.drieballen.models.PhotoUploadResponse;
-import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,13 +22,6 @@ public class ProfileController {
     public ProfileController(ProfileService profileService, PhotoController photoController) {
         this.profileService = profileService;
         this.photoController = photoController;
-    }
-
-    @GetMapping("/allUsers")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User>userList;
-        userList = profileService.getAllUsers();
-        return ResponseEntity.ok().body(userList);
     }
 
     @GetMapping("/all")
@@ -54,16 +43,9 @@ public class ProfileController {
         return ResponseEntity.ok().body(optionalProfile);
     }
 
-
-    @PostMapping("/{username}/photo")
-    public void assignPhotoToProfile(@PathVariable("username") String username, @RequestBody MultipartFile file){
-        PhotoUploadResponse photo = photoController.photoUpload(file);
-        profileService.assignPhotoToProfile(photo.getFileName(), username);
-    }
-
     @DeleteMapping(value = "/delete/{username}")
     public String deleteProfile(@PathVariable("username") String username) {
-        profileService.deleteProfile(username);
+        profileService.deleteUser(username);
         return "Gebruiker " + username + " is verwijderd";
     }
 

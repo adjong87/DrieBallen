@@ -33,10 +33,6 @@ public class ProfileService {
         this.photoUploadRepository = photoUploadRepository;
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
-
     public List<ProfileDto> getAllProfiles(){
         List<ProfileDto> profileDtoList = new ArrayList<>();
         List<Profile> profileList = profileRepository.findAll();
@@ -75,7 +71,7 @@ public class ProfileService {
         return dto;
     }
 
-    public void deleteProfile(String username) {
+    public void deleteUser(String username) {
         userRepository.deleteByUsername(username);
         profileRepository.deleteByUsername(username);
     }
