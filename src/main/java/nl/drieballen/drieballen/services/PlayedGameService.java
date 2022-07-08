@@ -37,7 +37,16 @@ public class PlayedGameService {
 
     public List<PlayedGameDto> findPlayedGameById(String username){
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
-        List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCase(username);
+        List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(username);
+        for(PlayedGame playedGame : playedGameList){
+            playedGameDtoList.add(toDto(playedGame));
+        }
+        return playedGameDtoList;
+    }
+
+    public List<PlayedGameDto> findPlayedGamesByScoreCardId(Long id){
+        List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
+        List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_Id(id);
         for(PlayedGame playedGame : playedGameList){
             playedGameDtoList.add(toDto(playedGame));
         }
@@ -64,6 +73,7 @@ public class PlayedGameService {
     public PlayedGameDto toDto(PlayedGame playedGame){
         PlayedGameDto playedGameDto = new PlayedGameDto();
         playedGameDto.setScoreCard(playedGame.getScoreCard());
+        playedGameDto.setProfile(playedGame.getProfile());
         playedGameDto.setUitgespeeld(playedGame.isUitgespeeld());
         return playedGameDto;
     }

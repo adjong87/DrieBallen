@@ -18,15 +18,15 @@ INSERT INTO users (username, password, email, user_profile) VALUES('jeanneau','$
 INSERT INTO users (username, password, email, user_profile) VALUES('hermans','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'hermanengreetschaapherder@gmail.com', 'hermans');
 INSERT INTO users (username, password, email, user_profile) VALUES('john','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'johndeman@gmail.com', 'john');
 INSERT INTO users (username, password, email, user_profile) VALUES('hermand','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'hermandriessen@gmail.com', 'hermand');
-INSERT INTO users (username, password, email, user_profile) VALUES('pieterpost','$2a$10$hUR7JaHbteZlAKiZF7mNi.sjdvtCcYZOVJUvBv1lKykgpkUVc773i', 'pieterpost@dummy.com', 'pieterpost');
+INSERT INTO users (username, password, email, user_profile) VALUES('pieterpost','$2a$10$kyVFisSyoq4y1aFiw1FIueBC3dNqDGltTDyNXWOe3bjkx.A72CA4W', 'pieterpost@dummy.com', 'pieterpost');
 
 INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 1);
- INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 2);
+INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 2);
 
 INSERT INTO user_roles (user_username, role_id) VALUES('gbies', 3);
-INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 2);
-INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 3);
+INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 1);
+-- INSERT INTO user_roles (user_username, role_id) VALUES('adjong87', 3);
 INSERT INTO user_roles (user_username, role_id) VALUES('kslabikova', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('kslabikova', 2);
 INSERT INTO user_roles (user_username, role_id) VALUES('jeanneau', 1);

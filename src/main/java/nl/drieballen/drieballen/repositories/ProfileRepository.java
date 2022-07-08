@@ -12,4 +12,5 @@ public interface ProfileRepository extends JpaRepository<Profile, String> {
     void deleteByUsername(String username);
 
     Optional<Profile> findByUsername(String username);
+
 }

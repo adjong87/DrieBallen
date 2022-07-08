@@ -5,27 +5,36 @@ import java.util.List;
 
 public class ScoreCardInputDto {
 
-    private int[] playerOneScore;
+    public int highestSerieP1;
 
-    private int[] playerTwoScore;
+    public int highestSerieP2;
 
     private int remainderP1;
 
     private int remainderP2;
 
-    public ScoreCardInputDto(int[] playerOneScore, int[] playerTwoScore, int remainderP1, int remainderP2) {
-        this.playerOneScore = playerOneScore;
-        this.playerTwoScore = playerTwoScore;
+    private double averageP1;
+
+    private double averageP2;
+
+    private int nrOfTurns;
+
+    public ScoreCardInputDto(int highestSerieP1, int highestSerieP2, int remainderP1, int remainderP2, double averageP1, double averageP2, int nrOfTurns) {
+        this.highestSerieP1 = highestSerieP1;
+        this.highestSerieP2 = highestSerieP2;
         this.remainderP1 = remainderP1;
         this.remainderP2 = remainderP2;
+        this.averageP1 = averageP1;
+        this.averageP2 = averageP2;
+        this.nrOfTurns = nrOfTurns;
     }
 
-    public int[] getPlayerOneScore() {
-        return playerOneScore;
+    public int getHighestSerieP1() {
+        return highestSerieP1;
     }
 
-    public int[] getPlayerTwoScore() {
-        return playerTwoScore;
+    public int getHighestSerieP2() {
+        return highestSerieP2;
     }
 
     public int getRemainderP1() {
@@ -36,12 +45,24 @@ public class ScoreCardInputDto {
         return remainderP2;
     }
 
-    public void setPlayerOneScore(int[] playerOneScore) {
-        this.playerOneScore = playerOneScore;
+    public double getAverageP1() {
+        return averageP1;
     }
 
-    public void setPlayerTwoScore(int[] playerTwoScore) {
-        this.playerTwoScore = playerTwoScore;
+    public double getAverageP2() {
+        return averageP2;
+    }
+
+    public int getNrOfTurns() {
+        return nrOfTurns;
+    }
+
+    public void setHighestSerieP1(int highestSerieP1) {
+        this.highestSerieP1 = highestSerieP1;
+    }
+
+    public void setHighestSerieP2(int highestSerieP2) {
+        this.highestSerieP2 = highestSerieP2;
     }
 
     public void setRemainderP1(int remainderP1) {
@@ -50,6 +71,18 @@ public class ScoreCardInputDto {
 
     public void setRemainderP2(int remainderP2) {
         this.remainderP2 = remainderP2;
+    }
+
+    public void setAverageP1(double averageP1) {
+        this.averageP1 = averageP1;
+    }
+
+    public void setAverageP2(double averageP2) {
+        this.averageP2 = averageP2;
+    }
+
+    public void setNrOfTurns(int nrOfTurns) {
+        this.nrOfTurns = nrOfTurns;
     }
 }
 

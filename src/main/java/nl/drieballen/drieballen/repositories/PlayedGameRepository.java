@@ -13,4 +13,7 @@ public interface PlayedGameRepository extends JpaRepository<PlayedGame, PlayedGa
     List<PlayedGame> findPlayedGamesById_UsernameContainingIgnoreCase(String username);
     List<PlayedGame> findAllByIdContaining(String username);
 
+    List<PlayedGame> findPlayedGamesById_Id(Long id);
+
+    List<PlayedGame> findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(String username);
 }

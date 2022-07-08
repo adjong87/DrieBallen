@@ -74,22 +74,16 @@ public class ScoreCardService {
     }
 
 
-    public ScoreCardDto correctScore(Long id, ScoreCardInputDto scoreCardInputDto) {
-        ScoreCard sc = scoreCardRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("scorecard " + id + " doesn't exist"));
-        Objects.requireNonNull(sc).setId(id);
-        sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
-        sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
-        scoreCardRepository.save(sc);
-        return fromScoreCard(sc);
-    }
-
     public ScoreCardDto fillInScore(Long id, ScoreCardInputDto scoreCardInputDto) {
         ScoreCard sc = scoreCardRepository.findByIdAndFilledInIsFalse(id).orElseThrow(() -> new RecordNotFoundException("Wedstrijd nummer: " + id + " is al gespeeld"));
         Objects.requireNonNull(sc).setId(id);
-        sc.setPlayerOneScore(scoreCardInputDto.getPlayerOneScore());
-        sc.setPlayerTwoScore(scoreCardInputDto.getPlayerTwoScore());
+        sc.setHighestSerieP1(scoreCardInputDto.getHighestSerieP1());
+        sc.setHighestSerieP2(scoreCardInputDto.getHighestSerieP2());
         sc.setRemainderP1(scoreCardInputDto.getRemainderP1());
         sc.setRemainderP2(scoreCardInputDto.getRemainderP2());
+        sc.setAverageP1(scoreCardInputDto.getAverageP1());
+        sc.setAverageP2(scoreCardInputDto.getAverageP2());
+        sc.setNrOfTurns(scoreCardInputDto.getNrOfTurns());
         sc.setFilledIn(true);
         scoreCardRepository.save(sc);
         return fromScoreCard(sc);
@@ -104,12 +98,14 @@ public class ScoreCardService {
         dto.setId(scoreCard.getId());
         dto.setPlayerOneName(scoreCard.getPlayerOneName());
         dto.setPlayerTwoName(scoreCard.getPlayerTwoName());
-        dto.setPlayerOneScore(scoreCard.getPlayerOneScore());
-        dto.setPlayerTwoScore(scoreCard.getPlayerTwoScore());
+        dto.setHighestSerieP1(scoreCard.getHighestSerieP1());
+        dto.setHighestSerieP2(scoreCard.getHighestSerieP2());
         dto.setAimScoreP1(scoreCard.getAimScoreP1());
         dto.setAimScoreP2(scoreCard.getAimScoreP2());
         dto.setRemainderP1(scoreCard.getRemainderP1());
         dto.setRemainderP2(scoreCard.getRemainderP2());
+        dto.setAverageP1(scoreCard.getAverageP1());
+        dto.setAverageP2(scoreCard.getAverageP2());
         dto.setNrOfTurns(scoreCard.getNrOfTurns());
         dto.setGespeeldOp(scoreCard.getGespeeldOp());
         return dto;

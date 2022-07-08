@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -84,6 +83,6 @@ public class ProfileService {
             Profile profile = optionalProfile.get();
             profile.setPhoto(photo);
             profileRepository.save(profile);
-        }
+        } else throw(new RecordNotFoundException("Het profiel kan niet worden gevonden"));
     }
 }
