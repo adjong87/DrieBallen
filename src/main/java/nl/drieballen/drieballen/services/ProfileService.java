@@ -4,11 +4,11 @@ import nl.drieballen.drieballen.dtos.*;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.Profile;
-import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
