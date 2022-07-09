@@ -66,7 +66,9 @@ public class AuthController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return ResponseEntity.ok(
+                new JwtResponse(
+                        jwt,
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
@@ -77,20 +79,26 @@ public class AuthController {
             if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(
+                            new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(
+                            new MessageResponse("Error: Email is already in use!"));
         }
-        // Create new user's account
-
-        User user = new User(signUpRequest.getUsername(),
+        User user =
+                new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-        Profile profile = new Profile(signUpRequest.getUsername(), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getAimScore());
+        Profile profile =
+                new Profile(signUpRequest.getUsername(),
+                signUpRequest.getFirstName(),
+                signUpRequest.getLastName(),
+                signUpRequest.getAge(),
+                signUpRequest.getAimScore());
         profileRepository.save(profile);
 
         user.setProfile(profile);
@@ -100,24 +108,28 @@ public class AuthController {
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() ->
+                            new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "ADMIN" -> {
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() ->
+                                        new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
                     }
                     case "MOD" -> {
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() ->
+                                        new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
                     }
                     default -> {
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() ->
+                                        new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                     }
                 }
@@ -127,7 +139,8 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(
+                new MessageResponse("User registered successfully!"));
     }
 
 
