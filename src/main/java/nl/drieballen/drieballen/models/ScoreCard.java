@@ -1,17 +1,11 @@
 package nl.drieballen.drieballen.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
 public class ScoreCard {
-
-
-    public ScoreCard() {
-    }
 
     public ScoreCard(String playerOneName, String playerTwoName, int aimScoreP1, int aimScoreP2) {
         this.playerOneName = playerOneName;

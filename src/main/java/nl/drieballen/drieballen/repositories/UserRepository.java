@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.repositories;
-
 import java.util.Optional;
-
 import nl.drieballen.drieballen.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.security;
-
 import nl.drieballen.drieballen.security.jwt.AuthEntryPointJwt;
 import nl.drieballen.drieballen.security.jwt.AuthTokenFilter;
 import nl.drieballen.drieballen.security.services.UserDetailsServiceImpl;
@@ -55,22 +54,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().and().csrf().disable().formLogin().disable()
                 .cors().and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-//                .antMatchers("/api/auth/signUp").hasRole("ADMIN")
+                .antMatchers("/api/auth/signUp").hasRole("ADMIN")
                 .antMatchers("/delete/**/photo").authenticated()
                 .antMatchers("/upload/**").authenticated()
                 .antMatchers("/upload/**/**").authenticated()
-                .antMatchers("/download/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
-                .antMatchers("/profiles/getUserData").permitAll()
+                .antMatchers("/download/**").permitAll()
+                .antMatchers("/profiles/getUserData").authenticated()
                 .antMatchers("/profiles/profile").hasAnyRole("ADMIN", "MODERATOR", "USER")
-                .antMatchers("/profiles/**").hasRole("ADMIN")
+                .antMatchers("/profiles/**").hasAnyRole("ADMIN", "MODERATOR")
                 .antMatchers("/profiles/**/photo").hasAnyRole("ADMIN", "MODERATOR", "USER")
                 .antMatchers("/profiles/delete/**").hasRole("ADMIN")
-                .antMatchers("/scorecards/card").hasAnyRole("ADMIN", "USER", "MODERATOR")
+                .antMatchers("/scorecards/card").hasAnyRole("ADMIN","MODERATOR")
                 .antMatchers("/scorecards/donecard").hasAnyRole("ADMIN", "USER", "MODERATOR")
                 .antMatchers("/scorecards/**").hasRole("MODERATOR")
-//                .antMatchers("/scorecards/referee").hasRole("MOD")
-//                .antMatchers("/scorecards/fill").hasRole("MOD")
-//                .antMatchers("/scorecards/delete").hasRole("ADMIN")
                 .antMatchers("/playedgame/find").hasAnyRole("USER", "ADMIN", "MODERATOR")
                 .antMatchers("/playedgame/findbyid").hasAnyRole("USER", "ADMIN", "MODERATOR")
                 .antMatchers("/playedgame/createGame").hasRole("ADMIN")

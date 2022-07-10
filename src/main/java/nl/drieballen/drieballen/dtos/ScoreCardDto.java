@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.dtos;
-
 import java.time.LocalDate;
 
 public class ScoreCardDto {
@@ -29,14 +28,6 @@ public class ScoreCardDto {
     private int nrOfTurns;
 
     private LocalDate gespeeldOp;
-
-
-    // ------ CONSTRUCTORS
-
-    public ScoreCardDto() {
-    }
-
-    // ------ GETTERS
 
     public Long getId() {
         return Id;
@@ -89,9 +80,6 @@ public class ScoreCardDto {
     public LocalDate getGespeeldOp() {
         return gespeeldOp;
     }
-
-    // ------ SETTERS
-
 
     public void setId(Long id) {
         Id = id;

@@ -1,6 +1,5 @@
 package nl.drieballen.drieballen.payload.request;
 import java.util.Set;
-
 import javax.validation.constraints.*;
 
 public class SignupRequest {

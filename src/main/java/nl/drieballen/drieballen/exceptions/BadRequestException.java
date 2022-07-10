@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.exceptions;
-
 import java.io.Serial;
 
 public class BadRequestException extends RuntimeException {

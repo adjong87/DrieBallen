@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.models;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;

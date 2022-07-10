@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.repositories;
-
 import nl.drieballen.drieballen.models.ERole;
 import nl.drieballen.drieballen.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

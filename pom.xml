@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.drieballen</groupId>
     <artifactId>DrieBallen</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>DrieBallen</name>
     <description>DrieBallen</description>
     <properties>

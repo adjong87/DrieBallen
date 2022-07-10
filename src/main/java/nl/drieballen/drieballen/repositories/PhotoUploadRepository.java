@@ -6,6 +6,4 @@ import java.util.Optional;
 public interface PhotoUploadRepository extends JpaRepository<PhotoUploadResponse, String> {
 
     Optional<PhotoUploadResponse> findByFileName(String fileName);
-
-
 }

@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.dtos;
-
 import nl.drieballen.drieballen.models.Role;
-
 import java.util.HashSet;
 import java.util.Set;
 

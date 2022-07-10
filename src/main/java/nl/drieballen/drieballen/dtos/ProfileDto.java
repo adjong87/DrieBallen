@@ -7,16 +7,12 @@ import java.util.Collection;
 public class ProfileDto {
     private String username;
     private String firstName;
-
     private String lastName;
     private int age;
     private int aimScore;
     private PhotoUploadResponse photo;
 
     private Collection<PlayedGame> playedGames;
-
-
-    // ----- GETTERS ------------
 
     public String getUsername() {
         return username;
@@ -45,9 +41,6 @@ public class ProfileDto {
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
     }
-
-
-    // ----- SETTERS ------------
 
     public void setUsername(String username) {
         this.username = username;

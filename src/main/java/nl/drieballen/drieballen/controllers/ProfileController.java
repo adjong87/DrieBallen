@@ -1,12 +1,10 @@
 package nl.drieballen.drieballen.controllers;
-
 import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.dtos.UserDto;
 import nl.drieballen.drieballen.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,12 +14,9 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    private final PhotoController photoController;
-
     @Autowired
-    public ProfileController(ProfileService profileService, PhotoController photoController) {
+    public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
-        this.photoController = photoController;
     }
 
     @GetMapping("/all")

@@ -1,8 +1,6 @@
 package nl.drieballen.drieballen.dtos;
-
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.ScoreCard;
-
 
 public class PlayedGameDto {
 

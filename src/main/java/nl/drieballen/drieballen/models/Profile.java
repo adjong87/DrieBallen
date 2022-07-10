@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -36,12 +34,6 @@ public class Profile {
         this.aimScore = aimScore;
     }
 
-    public Profile() {
-    }
-
-    // ----- GETTERS ------------
-
-
     public String getUsername() {
         return username;
     }
@@ -70,9 +62,6 @@ public class Profile {
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
     }
-
-    // ----- SETTERS ------------
-
 
     public void setUsername(String username) {
         this.username = username;

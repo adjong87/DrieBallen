@@ -1,9 +1,7 @@
 package nl.drieballen.drieballen.controllers;
-
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.services.PhotoService;
 import nl.drieballen.drieballen.services.ProfileService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.core.io.Resource;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Objects;
@@ -39,7 +36,7 @@ public class PhotoController {
 
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downloadPhoto(@PathVariable String fileName, HttpServletRequest request) {
-        Resource resource = photoservice.downloadPhoto(fileName);
+        Resource resource = photoservice.downLoadFile(fileName);
         String mimeType;
 
         try{

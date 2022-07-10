@@ -1,7 +1,5 @@
 package nl.drieballen.drieballen.services;
-
 import nl.drieballen.drieballen.models.Profile;
-import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
@@ -11,7 +9,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -19,7 +16,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class PhotoService {
@@ -32,7 +28,6 @@ public class PhotoService {
 
     public PhotoService(@Value("${my.upload_location}") String fileStorageLocation, PhotoUploadRepository photoUploadRepository, ProfileRepository profileRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
-
         this.fileStorageLocation = fileStorageLocation;
         this.photoUploadRepository = photoUploadRepository;
         this.profileRepository = profileRepository;
@@ -42,12 +37,12 @@ public class PhotoService {
         } catch (IOException e) {
             throw new RuntimeException("Issue in creating file directory");
         }
-
     }
 
     public PhotoUploadResponse uploadPhoto(MultipartFile file, String url) {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         Path filePath = Paths.get(fileStoragePath + "\\" + fileName);
+        // change for windows to two backslashes: "\\" + fileName. For mac it's "/".
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -58,7 +53,7 @@ public class PhotoService {
         return photo;
     }
 
-    public Resource downloadPhoto(String fileName) {
+    public Resource downLoadFile(String fileName) {
         Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(fileName);
         Resource resource;
         try {
@@ -66,15 +61,16 @@ public class PhotoService {
         } catch (MalformedURLException e) {
             throw new RuntimeException("Issue in reading the file", e);
         }
-        if (resource.exists() && resource.isReadable()) {
+        if(resource.exists()&& resource.isReadable()) {
             return resource;
         } else {
-            throw new RuntimeException("This file doesn't exist or not readable");
+            throw new RuntimeException("the file doesn't exist or not readable");
         }
     }
 
     public String deletePhoto(String username) {
-        Profile profile = profileRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze gebruiker bestaat niet"));
+        Profile profile = profileRepository.findByUsername(username).orElseThrow(() ->
+                new RuntimeException("Deze gebruiker bestaat niet"));
         String filename = profile.getPhoto().getFileName();
         profile.setPhoto(null);
         photoUploadRepository.deleteById(filename);

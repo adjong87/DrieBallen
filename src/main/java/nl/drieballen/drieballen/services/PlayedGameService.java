@@ -55,15 +55,22 @@ public class PlayedGameService {
 
     public void createPlayedGame(String playerOne, String playerTwo){
         Profile p1 = profileRepository.findByUsername(playerOne).
-                orElseThrow(() -> new RecordNotFoundException("username " + playerOne + " doesn't exist"));
+                orElseThrow(() ->
+                        new RecordNotFoundException("username " + playerOne + " doesn't exist"));
         Profile p2 = profileRepository.findByUsername(playerTwo).
-                orElseThrow(() -> new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
+                orElseThrow(() ->
+                        new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
         ScoreCard sC =
-                new ScoreCard(p1.getFirstName(), p2.getFirstName(), p1.getAimScore(), p2.getAimScore());
+                new ScoreCard(p1.getFirstName(),
+                        p2.getFirstName(),
+                        p1.getAimScore(),
+                        p2.getAimScore());
         sC.setFilledIn(false);
         scoreCardRepository.save(sC);
-        PlayedGame pg1 = new PlayedGame(new PlayedGameId(playerOne, sC.getId()), p1, sC);
-        PlayedGame pg2 = new PlayedGame(new PlayedGameId(playerTwo, sC.getId()), p2, sC);
+        PlayedGame pg1 = new PlayedGame(
+                new PlayedGameId(playerOne, sC.getId()), p1, sC);
+        PlayedGame pg2 = new PlayedGame(
+                new PlayedGameId(playerTwo, sC.getId()), p2, sC);
         p1.addPlayedGame(pg1);
         p2.addPlayedGame(pg2);
         profileRepository.save(p1);
@@ -71,7 +78,8 @@ public class PlayedGameService {
     }
 
     public PlayedGameDto toDto(PlayedGame playedGame){
-        PlayedGameDto playedGameDto = new PlayedGameDto();
+        PlayedGameDto playedGameDto =
+                new PlayedGameDto();
         playedGameDto.setScoreCard(playedGame.getScoreCard());
         playedGameDto.setProfile(playedGame.getProfile());
         playedGameDto.setUitgespeeld(playedGame.isUitgespeeld());

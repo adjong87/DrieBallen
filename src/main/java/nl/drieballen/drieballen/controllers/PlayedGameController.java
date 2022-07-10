@@ -1,12 +1,9 @@
 package nl.drieballen.drieballen.controllers;
-
 import nl.drieballen.drieballen.dtos.PlayedGameDto;
 import nl.drieballen.drieballen.exceptions.BadRequestException;
 import nl.drieballen.drieballen.services.PlayedGameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 import java.util.Objects;
 
@@ -20,13 +17,6 @@ public class PlayedGameController {
     public PlayedGameController(PlayedGameService playedGameService) {
         this.playedGameService = playedGameService;
     }
-
-//    @GetMapping("/")
-//    public ResponseEntity<List<PlayedGame>> getAllPlayedGames() {
-//        List<PlayedGame> playedGameList;
-//        playedGameList = playedGameService.getAllPlayedGames();
-//        return ResponseEntity.ok().body(playedGameList);
-//    }
 
     @GetMapping("/find")
     public ResponseEntity<List<PlayedGameDto>> getAllPlayedGamesByUsername(@RequestParam(value = "username") String username){

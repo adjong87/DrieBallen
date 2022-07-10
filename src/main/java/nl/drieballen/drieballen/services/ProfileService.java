@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.services;
-
 import nl.drieballen.drieballen.dtos.*;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
@@ -8,10 +7,8 @@ import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
 import nl.drieballen.drieballen.repositories.ProfileRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,12 +39,14 @@ public class ProfileService {
     }
 
     public ProfileDto getProfile(String username) {
-        Profile profile = profileRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("test"));
+        Profile profile = profileRepository.findByUsername(username).orElseThrow(() ->
+                new RuntimeException("test"));
          return fromProfile(profile);
     }
 
     public UserDto getUserData(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Deze info is niet beschikbaar"));
+        User user = userRepository.findByUsername(username).orElseThrow(() ->
+                new RuntimeException("Deze info is niet beschikbaar"));
         return fromUser(user);
     }
 

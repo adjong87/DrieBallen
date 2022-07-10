@@ -12,7 +12,6 @@ INSERT INTO users (username, password, email, user_profile) VALUES('pieterpost',
 INSERT INTO users (username, password, email, user_profile) VALUES('dikkiedik','$2a$12$CXD2Jxe3QZrA3ZeI9WG8zuowy/K9flbePeK.VpLyz0RR29kdc/rl.', 'dikkiedik@dummy.com', 'dikkiedik');
 INSERT INTO users (username, password, email, user_profile) VALUES('dickjaspers','$2a$12$CXD2Jxe3QZrA3ZeI9WG8zuowy/K9flbePeK.VpLyz0RR29kdc/rl.', 'dickjaspers@gmail.com', 'dickjaspers');
 
-
 INSERT INTO user_roles (user_username, role_id) VALUES('janjansen', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('pieterpost', 1);
 INSERT INTO user_roles (user_username, role_id) VALUES('pieterpost', 2);

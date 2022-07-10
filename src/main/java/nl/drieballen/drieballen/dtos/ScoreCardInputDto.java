@@ -1,8 +1,5 @@
 package nl.drieballen.drieballen.dtos;
 
-import javax.persistence.ElementCollection;
-import java.util.List;
-
 public class ScoreCardInputDto {
 
     public int highestSerieP1;

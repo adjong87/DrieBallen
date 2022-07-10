@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.models;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

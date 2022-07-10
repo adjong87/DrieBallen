@@ -1,14 +1,11 @@
 package nl.drieballen.drieballen.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users",
@@ -16,6 +13,7 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
+
 public class User {
         @Id
         @NotBlank
@@ -42,9 +40,6 @@ public class User {
         @OneToOne
         @JoinColumn(name="user_profile")
         private Profile profile;
-
-        public User() {
-        }
 
         public User(String username, String email, String password) {
                 this.username = username;

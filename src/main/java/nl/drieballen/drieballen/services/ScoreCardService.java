@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.services;
-
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
@@ -7,7 +6,6 @@ import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +15,6 @@ import java.util.Optional;
 public class ScoreCardService {
 
     private final ScoreCardRepository scoreCardRepository;
-
 
     @Autowired
     public ScoreCardService(ScoreCardRepository scoreCardRepository) {
