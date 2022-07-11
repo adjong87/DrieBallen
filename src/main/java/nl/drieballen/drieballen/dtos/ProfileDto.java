@@ -14,6 +14,7 @@ public class ProfileDto {
 
     private Collection<PlayedGame> playedGames;
 
+
     public String getUsername() {
         return username;
     }

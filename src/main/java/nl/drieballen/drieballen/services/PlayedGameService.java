@@ -1,7 +1,6 @@
 package nl.drieballen.drieballen.services;
 
 import nl.drieballen.drieballen.dtos.PlayedGameDto;
-import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.PlayedGame;
@@ -29,11 +28,6 @@ public class PlayedGameService {
         this.scoreCardRepository = scoreCardRepository;
         this.playedGameRepository = playedGameRepository;
     }
-
-//    public List<PlayedGame> getAllPlayedGames(){
-//        List<PlayedGame> playedGameList = playedGameRepository.findAll();
-//        return playedGameList;
-//    }
 
     public List<PlayedGameDto> findPlayedGameById(String username){
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
@@ -83,6 +77,13 @@ public class PlayedGameService {
         playedGameDto.setScoreCard(playedGame.getScoreCard());
         playedGameDto.setProfile(playedGame.getProfile());
         playedGameDto.setUitgespeeld(playedGame.isUitgespeeld());
+        return playedGameDto;
+    }
+
+    public PlayedGameDto fromDto(PlayedGameDto playedGameDto){
+        PlayedGame playedGame =
+                new PlayedGame(new PlayedGameId(playedGameDto.getProfile().getUsername(), playedGameDto.getScoreCard().getId()), playedGameDto.getProfile(), playedGameDto.getScoreCard());
+        playedGame.setUitgespeeld(playedGameDto.isUitgespeeld());
         return playedGameDto;
     }
 }
