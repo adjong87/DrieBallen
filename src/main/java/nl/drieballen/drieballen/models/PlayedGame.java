@@ -27,6 +27,9 @@ public class PlayedGame {
         this.scoreCard = scoreCard;
     }
 
+    public PlayedGame() {
+    }
+
     public PlayedGameId getId() {
         return id;
     }

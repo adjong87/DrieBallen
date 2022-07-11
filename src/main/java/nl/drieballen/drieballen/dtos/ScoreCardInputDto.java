@@ -26,6 +26,9 @@ public class ScoreCardInputDto {
         this.nrOfTurns = nrOfTurns;
     }
 
+    public ScoreCardInputDto() {
+    }
+
     public int getHighestSerieP1() {
         return highestSerieP1;
     }

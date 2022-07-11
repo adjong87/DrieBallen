@@ -7,6 +7,9 @@ import java.util.Collection;
 @Entity
 public class ScoreCard {
 
+    public ScoreCard() {
+    }
+
     public ScoreCard(String playerOneName, String playerTwoName, int aimScoreP1, int aimScoreP2) {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
@@ -47,8 +50,6 @@ public class ScoreCard {
     private Collection<PlayedGame> playedGames;
 
     private boolean filledIn;
-
-    // ----- GETTERS ------------
 
     public Long getId() {
         return id;
@@ -109,8 +110,6 @@ public class ScoreCard {
     public boolean isFilledIn() {
         return filledIn;
     }
-
-    // ----- SETTERS ------------
 
 
     public void setId(Long id) {

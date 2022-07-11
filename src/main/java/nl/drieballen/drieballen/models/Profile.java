@@ -34,6 +34,9 @@ public class Profile {
         this.aimScore = aimScore;
     }
 
+    public Profile() {
+    }
+
     public String getUsername() {
         return username;
     }
