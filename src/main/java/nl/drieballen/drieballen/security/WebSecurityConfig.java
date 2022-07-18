@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.security;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.security.jwt.AuthEntryPointJwt;
 import nl.drieballen.drieballen.security.jwt.AuthTokenFilter;
 import nl.drieballen.drieballen.security.services.UserDetailsServiceImpl;
@@ -18,12 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean

@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.services;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
@@ -12,14 +13,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ScoreCardService {
 
     private final ScoreCardRepository scoreCardRepository;
-
-    @Autowired
-    public ScoreCardService(ScoreCardRepository scoreCardRepository) {
-        this.scoreCardRepository = scoreCardRepository;
-    }
 
     public List<ScoreCardDto> getAllNonFilled() {
         List<ScoreCardDto> scoreCardDtoList = new ArrayList<>();

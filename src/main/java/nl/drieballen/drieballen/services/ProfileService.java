@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.services;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.*;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
@@ -14,20 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 @Transactional
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
-
     private final UserRepository userRepository;
-
     private final PhotoUploadRepository photoUploadRepository;
 
-    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository, PhotoUploadRepository photoUploadRepository) {
-        this.profileRepository = profileRepository;
-        this.userRepository = userRepository;
-        this.photoUploadRepository = photoUploadRepository;
-    }
 
     public List<ProfileDto> getAllProfiles(){
         List<ProfileDto> profileDtoList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package nl.drieballen.drieballen.services;
 
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.PlayedGameDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.Profile;
@@ -15,19 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PlayedGameService {
 
     private final ProfileRepository profileRepository;
-
     private final ScoreCardRepository scoreCardRepository;
-
     private final PlayedGameRepository playedGameRepository;
 
-    public PlayedGameService(ProfileRepository profileRepository, ScoreCardRepository scoreCardRepository, PlayedGameRepository playedGameRepository) {
-        this.profileRepository = profileRepository;
-        this.scoreCardRepository = scoreCardRepository;
-        this.playedGameRepository = playedGameRepository;
-    }
 
     public List<PlayedGameDto> findPlayedGameById(String username){
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();

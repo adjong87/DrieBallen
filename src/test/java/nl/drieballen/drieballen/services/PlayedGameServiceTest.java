@@ -6,14 +6,11 @@ import nl.drieballen.drieballen.models.PlayedGameId;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.repositories.PlayedGameRepository;
-import nl.drieballen.drieballen.repositories.ProfileRepository;
-import nl.drieballen.drieballen.repositories.ScoreCardRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -28,11 +25,7 @@ public class PlayedGameServiceTest {
     private PlayedGameService playedGameService;
     @Mock
     private PlayedGameRepository playedGameRepository;
-    @Mock
-    private ScoreCardRepository scoreCardRepository;
 
-    @Mock
-    private ProfileRepository profileRepository;
 
 //    @Test
 //    @DisplayName("Test should pass if PlayedGame contains username that was put in that is part of PlayedGame id and scorecard filled_in is true")

@@ -1,8 +1,15 @@
 package nl.drieballen.drieballen.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class PlayedGame {
     @JsonIgnore
     @EmbeddedId
@@ -26,40 +33,4 @@ public class PlayedGame {
         this.profile = profile;
         this.scoreCard = scoreCard;
     }
-
-    public PlayedGame() {
-    }
-
-    public PlayedGameId getId() {
-        return id;
-    }
-
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public ScoreCard getScoreCard() {
-        return scoreCard;
-    }
-
-    public boolean isUitgespeeld() {
-        return uitgespeeld;
-    }
-
-    public void setId(PlayedGameId id) {
-        this.id = id;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public void setScoreCard(ScoreCard scoreCard) {
-        this.scoreCard = scoreCard;
-    }
-
-    public void setUitgespeeld(boolean uitgespeeld) {
-        this.uitgespeeld = uitgespeeld;
-    }
-
 }

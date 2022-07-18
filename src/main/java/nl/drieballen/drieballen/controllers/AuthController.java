@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.controllers;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.models.ERole;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.Role;
@@ -29,24 +30,14 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
     AuthenticationManager authenticationManager;
-
-    @Autowired
     ProfileRepository profileRepository;
-
-    @Autowired
     UserRepository userRepository;
-
-    @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
     PasswordEncoder encoder;
-
-    @Autowired
     JwtUtils jwtUtils;
 
     @PostMapping("/signIn")

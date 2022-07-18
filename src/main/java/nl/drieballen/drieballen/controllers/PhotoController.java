@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.controllers;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.services.PhotoService;
 import nl.drieballen.drieballen.services.ProfileService;
@@ -15,17 +16,13 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin
+@AllArgsConstructor
 @RequestMapping(value = "")
 public class PhotoController {
 
     private final PhotoService photoservice;
-
     private final ProfileService profileService;
 
-    public PhotoController(PhotoService photoservice, ProfileService profileService) {
-        this.photoservice = photoservice;
-        this.profileService = profileService;
-    }
 
     @PostMapping("/upload/{username}/photo")
     public void uploadPhoto(@PathVariable("username") String username, @RequestBody MultipartFile file){

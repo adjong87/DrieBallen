@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.controllers;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.PlayedGameDto;
 import nl.drieballen.drieballen.exceptions.BadRequestException;
 import nl.drieballen.drieballen.services.PlayedGameService;
@@ -8,15 +9,12 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin
 @RequestMapping("/playedgame")
 public class PlayedGameController {
 
     private final PlayedGameService playedGameService;
-
-    public PlayedGameController(PlayedGameService playedGameService) {
-        this.playedGameService = playedGameService;
-    }
 
     @GetMapping("/find")
     public ResponseEntity<List<PlayedGameDto>> getAllPlayedGamesByUsername(@RequestParam(value = "username") String username){

@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.security.services;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
+
     UserRepository userRepository;
 
     @Override

@@ -1,23 +1,19 @@
 package nl.drieballen.drieballen.controllers;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.ScoreCardDto;
 import nl.drieballen.drieballen.dtos.ScoreCardInputDto;
 import nl.drieballen.drieballen.services.ScoreCardService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin
 @RequestMapping(value = "/scorecards")
 public class ScoreCardController {
  
     private final ScoreCardService scoreCardService;
-
-    @Autowired
-    public ScoreCardController(ScoreCardService scoreCardService) {
-        this.scoreCardService = scoreCardService;
-    }
 
     @GetMapping("/referee")
     public ResponseEntity<List<ScoreCardDto>> getAllNonFilled(){

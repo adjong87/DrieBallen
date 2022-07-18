@@ -1,23 +1,19 @@
 package nl.drieballen.drieballen.controllers;
+import lombok.AllArgsConstructor;
 import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.dtos.UserDto;
 import nl.drieballen.drieballen.services.ProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @CrossOrigin
 @RequestMapping(value = "/profiles")
 public class ProfileController {
 
     private final ProfileService profileService;
-
-    @Autowired
-    public ProfileController(ProfileService profileService) {
-        this.profileService = profileService;
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<ProfileDto>> getAllProfiles(){
