@@ -3,17 +3,21 @@ import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.PlayedGame;
 import java.util.Collection;
 
-
 public class ProfileDto {
+
     private String username;
+
     private String firstName;
+
     private String lastName;
+
     private int age;
+
     private int aimScore;
+
     private PhotoUploadResponse photo;
 
     private Collection<PlayedGame> playedGames;
-
 
     public String getUsername() {
         return username;
@@ -62,6 +66,7 @@ public class ProfileDto {
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
     }
+
     public void setPhoto(PhotoUploadResponse photo) {
         this.photo = photo;
     }
@@ -69,7 +74,6 @@ public class ProfileDto {
     public void setPlayedGames(Collection<PlayedGame> playedGames) {
         this.playedGames = playedGames;
     }
-
 }
 
 

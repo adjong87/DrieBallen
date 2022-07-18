@@ -14,6 +14,9 @@ public class ScoreCard {
         this.aimScoreP2 = aimScoreP2;
     }
 
+    public ScoreCard() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
