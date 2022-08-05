@@ -61,10 +61,8 @@ public class PlayedGameService {
                         p2.getAimScore());
         sC.setFilledIn(false);
         scoreCardRepository.save(sC);
-        PlayedGame pg1 = new PlayedGame(
-                new PlayedGameId(playerOne, sC.getId()), p1, sC);
-        PlayedGame pg2 = new PlayedGame(
-                new PlayedGameId(playerTwo, sC.getId()), p2, sC);
+        PlayedGame pg1 = new PlayedGame(p1, sC);
+        PlayedGame pg2 = new PlayedGame(p2, sC);
         p1.addPlayedGame(pg1);
         p2.addPlayedGame(pg2);
         profileRepository.save(p1);

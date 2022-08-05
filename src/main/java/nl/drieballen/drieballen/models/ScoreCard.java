@@ -19,6 +19,7 @@ public class ScoreCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "scorecard_id")
     private Long id;
 
     private String playerOneName;

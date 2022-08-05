@@ -10,19 +10,18 @@ public class PlayedGame {
 
     @JsonIgnore
     @ManyToOne
-    @MapsId("profileUsername")
+    @MapsId("profile_username")
     @JoinColumn(name = "profile_username")
     Profile profile;
 
     @ManyToOne
-    @MapsId(value = "scoreCardId")
+    @MapsId(value = "scorecard_id")
     @JoinColumn(name = "scorecard_id")
     ScoreCard scoreCard;
 
     boolean uitgespeeld;
 
-    public PlayedGame(PlayedGameId id, Profile profile, ScoreCard scoreCard) {
-        this.id = id;
+    public PlayedGame(Profile profile, ScoreCard scoreCard) {
         this.profile = profile;
         this.scoreCard = scoreCard;
     }
