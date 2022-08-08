@@ -1,11 +1,12 @@
 package nl.drieballen.drieballen.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users",
@@ -85,6 +86,7 @@ public class User {
         public Profile getProfile() {
                 return profile;
         }
+
         public void setProfile(Profile profile) {
                 this.profile = profile;
         }

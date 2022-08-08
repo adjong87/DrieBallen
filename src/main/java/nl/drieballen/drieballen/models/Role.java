@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.models;
+
 import javax.persistence.*;
 
 @Entity

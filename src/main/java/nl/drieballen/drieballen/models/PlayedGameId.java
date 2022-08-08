@@ -1,7 +1,8 @@
 package nl.drieballen.drieballen.models;
+
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.io.Serializable;
 
 @Embeddable
 public class PlayedGameId implements Serializable {

@@ -1,14 +1,5 @@
 package nl.drieballen.drieballen.services;
-import nl.drieballen.drieballen.models.Profile;
-import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
-import nl.drieballen.drieballen.models.PhotoUploadResponse;
-import nl.drieballen.drieballen.repositories.ProfileRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -16,6 +7,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import nl.drieballen.drieballen.models.PhotoUploadResponse;
+import nl.drieballen.drieballen.models.Profile;
+import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
+import nl.drieballen.drieballen.repositories.ProfileRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PhotoService {
@@ -26,7 +27,9 @@ public class PhotoService {
 
     private final ProfileRepository profileRepository;
 
-    public PhotoService(@Value("${my.upload_location}") String fileStorageLocation, PhotoUploadRepository photoUploadRepository, ProfileRepository profileRepository) {
+    public PhotoService(@Value("${my.upload_location}") String fileStorageLocation,
+                        PhotoUploadRepository photoUploadRepository,
+                        ProfileRepository profileRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
         this.fileStorageLocation = fileStorageLocation;
         this.photoUploadRepository = photoUploadRepository;

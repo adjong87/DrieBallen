@@ -16,19 +16,6 @@ public class ScoreCardInputDto {
 
     private int nrOfTurns;
 
-    public ScoreCardInputDto(int highestSerieP1, int highestSerieP2, int remainderP1, int remainderP2, double averageP1, double averageP2, int nrOfTurns) {
-        this.highestSerieP1 = highestSerieP1;
-        this.highestSerieP2 = highestSerieP2;
-        this.remainderP1 = remainderP1;
-        this.remainderP2 = remainderP2;
-        this.averageP1 = averageP1;
-        this.averageP2 = averageP2;
-        this.nrOfTurns = nrOfTurns;
-    }
-
-    public ScoreCardInputDto() {
-    }
-
     public int getHighestSerieP1() {
         return highestSerieP1;
     }

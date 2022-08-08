@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.security.services;
+
 import nl.drieballen.drieballen.models.User;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,21 +1,13 @@
 package nl.drieballen.drieballen.models;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import javax.persistence.*;
 
 @Entity
 public class ScoreCard {
-
-    public ScoreCard() {
-    }
-
-    public ScoreCard(String playerOneName, String playerTwoName, int aimScoreP1, int aimScoreP2) {
-        this.playerOneName = playerOneName;
-        this.playerTwoName = playerTwoName;
-        this.aimScoreP1 = aimScoreP1;
-        this.aimScoreP2 = aimScoreP2;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,6 +42,16 @@ public class ScoreCard {
     private Collection<PlayedGame> playedGames;
 
     private boolean filledIn;
+
+    public ScoreCard() {
+    }
+
+    public ScoreCard(String playerOneName, String playerTwoName, int aimScoreP1, int aimScoreP2) {
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
+        this.aimScoreP1 = aimScoreP1;
+        this.aimScoreP2 = aimScoreP2;
+    }
 
     public Long getId() {
         return id;
@@ -99,8 +101,9 @@ public class ScoreCard {
         return nrOfTurns;
     }
 
-    public LocalDate getGespeeldOp() {
-        return gespeeldOp;
+    public String getGespeeldOp() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return gespeeldOp.format(formatter);
     }
 
     public Collection<PlayedGame> getPlayedGames() {

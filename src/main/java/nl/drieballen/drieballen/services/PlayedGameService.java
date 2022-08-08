@@ -1,19 +1,17 @@
 package nl.drieballen.drieballen.services;
 
-import nl.drieballen.drieballen.dtos.PlayedGameDto;
-import nl.drieballen.drieballen.dtos.ProfileDto;
-import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
-import nl.drieballen.drieballen.models.Profile;
-import nl.drieballen.drieballen.models.PlayedGame;
-import nl.drieballen.drieballen.models.PlayedGameId;
-import nl.drieballen.drieballen.models.ScoreCard;
-import nl.drieballen.drieballen.repositories.ProfileRepository;
-import nl.drieballen.drieballen.repositories.PlayedGameRepository;
-import nl.drieballen.drieballen.repositories.ScoreCardRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+import nl.drieballen.drieballen.dtos.PlayedGameDto;
+import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
+import nl.drieballen.drieballen.models.PlayedGame;
+import nl.drieballen.drieballen.models.PlayedGameId;
+import nl.drieballen.drieballen.models.Profile;
+import nl.drieballen.drieballen.models.ScoreCard;
+import nl.drieballen.drieballen.repositories.PlayedGameRepository;
+import nl.drieballen.drieballen.repositories.ProfileRepository;
+import nl.drieballen.drieballen.repositories.ScoreCardRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PlayedGameService {
@@ -29,11 +27,6 @@ public class PlayedGameService {
         this.scoreCardRepository = scoreCardRepository;
         this.playedGameRepository = playedGameRepository;
     }
-
-//    public List<PlayedGame> getAllPlayedGames(){
-//        List<PlayedGame> playedGameList = playedGameRepository.findAll();
-//        return playedGameList;
-//    }
 
     public List<PlayedGameDto> findPlayedGameById(String username){
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();

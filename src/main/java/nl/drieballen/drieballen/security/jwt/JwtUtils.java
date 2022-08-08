@@ -1,11 +1,11 @@
 package nl.drieballen.drieballen.security.jwt;
 
-import nl.drieballen.drieballen.security.services.UserDetailsImpl;
 import java.util.Date;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
 
@@ -19,12 +19,11 @@ public class JwtUtils {
     @Value("${drieBallen.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
-
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
+    public String generateJwtToken(List<String> roles, UserDetails userDetails) {
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
+                .setSubject(userDetails.getUsername())
+                .setIssuer("deDrieBallen")
+                .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

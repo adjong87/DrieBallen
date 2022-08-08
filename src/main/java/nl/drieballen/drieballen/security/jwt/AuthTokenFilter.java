@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.security.jwt;
+
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

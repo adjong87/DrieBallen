@@ -1,5 +1,4 @@
 package nl.drieballen.drieballen.dtos;
-import java.time.LocalDate;
 
 public class ScoreCardDto {
 
@@ -27,7 +26,7 @@ public class ScoreCardDto {
 
     private int nrOfTurns;
 
-    private LocalDate gespeeldOp;
+    private String gespeeldOp;
 
     public Long getId() {
         return Id;
@@ -77,7 +76,7 @@ public class ScoreCardDto {
         return nrOfTurns;
     }
 
-    public LocalDate getGespeeldOp() {
+    public String getGespeeldOp() {
         return gespeeldOp;
     }
 
@@ -130,7 +129,7 @@ public class ScoreCardDto {
         this.nrOfTurns = nrOfTurns;
     }
 
-    public void setGespeeldOp(LocalDate gespeeldOp) {
+    public void setGespeeldOp(String gespeeldOp) {
         this.gespeeldOp = gespeeldOp;
     }
 }

@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.exceptions;
+
 import java.io.Serial;
 
 public class RecordNotFoundException extends RuntimeException {

@@ -1,4 +1,5 @@
 package nl.drieballen.drieballen.controllers;
+
 import nl.drieballen.drieballen.models.ERole;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.Role;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -51,29 +53,25 @@ public class AuthController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                        loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
+        String jwt = jwtUtils.generateJwtToken(roles, userDetails);
         return ResponseEntity.ok(
                 new JwtResponse(
                         jwt,
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles));
+                        userDetails.getUsername(),
+                        roles));
     }
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-            if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(
@@ -88,21 +86,18 @@ public class AuthController {
         }
         User user =
                 new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                        signUpRequest.getEmail(),
+                        encoder.encode(signUpRequest.getPassword()));
         Profile profile =
                 new Profile(signUpRequest.getUsername(),
-                signUpRequest.getFirstName(),
-                signUpRequest.getLastName(),
-                signUpRequest.getAge(),
-                signUpRequest.getAimScore());
+                        signUpRequest.getFirstName(),
+                        signUpRequest.getLastName(),
+                        signUpRequest.getAge(),
+                        signUpRequest.getAimScore());
         profileRepository.save(profile);
-
         user.setProfile(profile);
-
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() ->
@@ -132,15 +127,9 @@ public class AuthController {
                 }
             });
         }
-
         user.setRoles(roles);
         userRepository.save(user);
-
         return ResponseEntity.ok(
                 new MessageResponse("User registered successfully!"));
     }
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package nl.drieballen.drieballen.payload.response;
 
 public class MessageResponse {
+
     private String message;
 
     public MessageResponse(String message) {

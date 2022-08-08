@@ -1,7 +1,8 @@
 package nl.drieballen.drieballen.models;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
 import java.util.Collection;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "profiles")
