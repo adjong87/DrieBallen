@@ -22,8 +22,8 @@ public class PlayedGame {
 
     boolean uitgespeeld;
 
-    public PlayedGame(PlayedGameId id, Profile profile, ScoreCard scoreCard) {
-        this.id = id;
+    public PlayedGame(Profile profile, ScoreCard scoreCard) {
+        id = new PlayedGameId(profile.getUsername(), scoreCard.getId());
         this.profile = profile;
         this.scoreCard = scoreCard;
     }

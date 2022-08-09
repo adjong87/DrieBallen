@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
+
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.repositories.PhotoUploadRepository;
@@ -72,12 +74,11 @@ public class PhotoService {
     }
 
     public String deletePhoto(String username) {
-        Profile profile = profileRepository.findByUsername(username).orElseThrow(() ->
-                new RuntimeException("Deze gebruiker bestaat niet"));
-        String filename = profile.getPhoto().getFileName();
-        profile.setPhoto(null);
+        Optional<Profile> profile = profileRepository.findByUsername(username);
+        String filename = profile.get().getPhoto().getFileName();
+        profile.get().setPhoto(null);
         photoUploadRepository.deleteById(filename);
-        profileRepository.save(profile);
+        profileRepository.save(profile.get());
         return filename;
     }
 }

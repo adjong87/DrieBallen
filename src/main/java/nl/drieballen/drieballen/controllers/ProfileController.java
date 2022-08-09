@@ -5,6 +5,7 @@ import nl.drieballen.drieballen.dtos.ProfileDto;
 import nl.drieballen.drieballen.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,7 +30,12 @@ public class ProfileController {
     @GetMapping(value = "/profile")
     public ResponseEntity<ProfileDto> getProfile(@RequestParam("username") String username) {
         ProfileDto optionalProfile = profileService.getProfile(username);
-        return ResponseEntity.ok().body(optionalProfile);
+        if(optionalProfile != null) {
+            return ResponseEntity.ok().body(optionalProfile);
+
+        } else {
+            throw new UsernameNotFoundException("Gebruiker met gebruikersnaam " + username + " niet gevonden");
+        }
     }
 
     @DeleteMapping(value = "/delete/{username}")

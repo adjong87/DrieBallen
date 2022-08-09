@@ -2,10 +2,10 @@ package nl.drieballen.drieballen.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import nl.drieballen.drieballen.dtos.PlayedGameDto;
 import nl.drieballen.drieballen.exceptions.RecordNotFoundException;
 import nl.drieballen.drieballen.models.PlayedGame;
-import nl.drieballen.drieballen.models.PlayedGameId;
 import nl.drieballen.drieballen.models.Profile;
 import nl.drieballen.drieballen.models.ScoreCard;
 import nl.drieballen.drieballen.repositories.PlayedGameRepository;
@@ -28,49 +28,47 @@ public class PlayedGameService {
         this.playedGameRepository = playedGameRepository;
     }
 
-    public List<PlayedGameDto> findPlayedGameById(String username){
+    public List<PlayedGameDto> findPlayedGameById(String username) {
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
-        List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(username);
-        for(PlayedGame playedGame : playedGameList){
+        List<PlayedGame> playedGameList =
+                playedGameRepository.findPlayedGamesById_UsernameContainingIgnoreCaseAndScoreCard_FilledInIsTrue(username);
+        for (PlayedGame playedGame : playedGameList) {
             playedGameDtoList.add(toDto(playedGame));
         }
         return playedGameDtoList;
     }
 
-    public List<PlayedGameDto> findPlayedGamesByScoreCardId(Long id){
+    public List<PlayedGameDto> findPlayedGamesByScoreCardId(Long id) {
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();
         List<PlayedGame> playedGameList = playedGameRepository.findPlayedGamesById_Id(id);
-        for(PlayedGame playedGame : playedGameList){
+        for (PlayedGame playedGame : playedGameList) {
             playedGameDtoList.add(toDto(playedGame));
         }
         return playedGameDtoList;
     }
 
-    public void createPlayedGame(String playerOne, String playerTwo){
-        Profile p1 = profileRepository.findByUsername(playerOne).
-                orElseThrow(() ->
+    public void createPlayedGame(String playerOne, String playerTwo) {
+        Profile p1 = profileRepository.findByUsername(playerOne)
+                .orElseThrow(() ->
                         new RecordNotFoundException("username " + playerOne + " doesn't exist"));
-        Profile p2 = profileRepository.findByUsername(playerTwo).
-                orElseThrow(() ->
+        Profile p2 = profileRepository.findByUsername(playerTwo)
+                .orElseThrow(() ->
                         new RecordNotFoundException("username " + playerTwo + " doesn't exist"));
-        ScoreCard sC =
-                new ScoreCard(p1.getFirstName(),
-                        p2.getFirstName(),
-                        p1.getAimScore(),
-                        p2.getAimScore());
+        ScoreCard sC = new ScoreCard(p1.getFirstName(),
+                p2.getFirstName(),
+                p1.getAimScore(),
+                p2.getAimScore());
         sC.setFilledIn(false);
         scoreCardRepository.save(sC);
-        PlayedGame pg1 = new PlayedGame(
-                new PlayedGameId(playerOne, sC.getId()), p1, sC);
-        PlayedGame pg2 = new PlayedGame(
-                new PlayedGameId(playerTwo, sC.getId()), p2, sC);
+        PlayedGame pg1 = new PlayedGame(p1, sC);
+        PlayedGame pg2 = new PlayedGame(p2, sC);
         p1.addPlayedGame(pg1);
         p2.addPlayedGame(pg2);
         profileRepository.save(p1);
         profileRepository.save(p2);
     }
 
-    public PlayedGameDto toDto(PlayedGame playedGame){
+    public PlayedGameDto toDto(PlayedGame playedGame) {
         PlayedGameDto playedGameDto =
                 new PlayedGameDto();
         playedGameDto.setScoreCard(playedGame.getScoreCard());
