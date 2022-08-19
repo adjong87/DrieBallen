@@ -3,6 +3,7 @@ package nl.drieballen.drieballen.controllers;
 import java.io.IOException;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
+
 import nl.drieballen.drieballen.models.PhotoUploadResponse;
 import nl.drieballen.drieballen.services.PhotoService;
 import nl.drieballen.drieballen.services.ProfileService;
@@ -55,6 +56,6 @@ public class PhotoController {
     @DeleteMapping(value = "/delete/{username}/photo")
     public ResponseEntity<String> deletePhoto(@PathVariable("username") String username) {
         photoservice.deletePhoto(username);
-        return ResponseEntity.ok("Foto is verwijderd");
+        return ResponseEntity.ok(photoservice.deletePhoto(username));
     }
 }

@@ -20,7 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class PhotoService {
     @Value("${my.upload_location}")
     private Path fileStoragePath;

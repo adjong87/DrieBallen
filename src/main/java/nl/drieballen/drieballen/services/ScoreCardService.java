@@ -32,25 +32,21 @@ public class ScoreCardService {
     }
 
     public ScoreCardDto getFinishedScoreCard(Long id) {
-        ScoreCardDto dto = new ScoreCardDto();
         Optional<ScoreCard> scoreCard = scoreCardRepository.findByIdAndFilledInIsTrue(id);
         if (scoreCard.isPresent()) {
-            dto = fromScoreCard(scoreCard.get());
+            return fromScoreCard(scoreCard.get());
         } else {
             throw new RecordNotFoundException("deze scorecard bestaat niet finished");
         }
-        return dto;
     }
 
     public ScoreCardDto getScoreCard(Long id) {
-        ScoreCardDto dto = new ScoreCardDto();
         Optional<ScoreCard> scoreCard = scoreCardRepository.findById(id);
         if (scoreCard.isPresent()) {
-            dto = fromScoreCard(scoreCard.get());
+            return fromScoreCard(scoreCard.get());
         } else {
             throw new RecordNotFoundException("deze scorecard bestaat niet unfinished");
         }
-        return dto;
     }
 
     public ScoreCardDto fillInScore(Long id, ScoreCardInputDto scoreCardInputDto) {

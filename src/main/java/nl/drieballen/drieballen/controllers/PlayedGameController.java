@@ -35,7 +35,7 @@ public class PlayedGameController {
         return ResponseEntity.ok().body(playedGameDtoList);
     }
 
-    @PostMapping("/createGame")
+    @GetMapping("/createGame")
     public ResponseEntity<String> createPlayedGame(
             @RequestParam(value = "playerOne") String playerOne, @RequestParam(value = "playerTwo") String playerTwo) {
         if (!Objects.equals(playerOne, playerTwo)) {

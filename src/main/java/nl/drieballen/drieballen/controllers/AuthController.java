@@ -13,11 +13,13 @@ import nl.drieballen.drieballen.repositories.RoleRepository;
 import nl.drieballen.drieballen.repositories.UserRepository;
 import nl.drieballen.drieballen.security.jwt.JwtUtils;
 import nl.drieballen.drieballen.security.services.UserDetailsImpl;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -84,53 +86,20 @@ public class AuthController {
                     .body(
                             new MessageResponse("Error: Email is already in use!"));
         }
-        User user =
-                new User(signUpRequest.getUsername(),
-                        signUpRequest.getEmail(),
-                        encoder.encode(signUpRequest.getPassword()));
-        Profile profile =
-                new Profile(signUpRequest.getUsername(),
-                        signUpRequest.getFirstName(),
-                        signUpRequest.getLastName(),
-                        signUpRequest.getAge(),
-                        signUpRequest.getAimScore());
-        profileRepository.save(profile);
-        user.setProfile(profile);
-        Set<String> strRoles = signUpRequest.getRole();
+        User user = new User(SignupRequest signUpRequest);
+
+        Set<String> strAuthorities = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() ->
-                            new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "ADMIN" -> {
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() ->
-                                        new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                    }
-                    case "MOD" -> {
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() ->
-                                        new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-                    }
-                    default -> {
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() ->
-                                        new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                    }
-                }
-            });
-        }
+        strAuthorities.forEach(authority -> {
+            switch (authority) {
+                case "ADMIN" -> roles.add(roleRepository.getByName(ERole.ROLE_ADMIN));
+                case "MODERATOR" -> roles.add(roleRepository.getByName(ERole.ROLE_MODERATOR));
+                case "USER" -> roles.add(roleRepository.getByName(ERole.ROLE_USER));
+            }
+        });
         user.setRoles(roles);
         userRepository.save(user);
-        return ResponseEntity.ok(
-                new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(user);
     }
 
 

@@ -50,6 +50,7 @@ public class ProfileService {
         dto.setFirstName(profile.getFirstName());
         dto.setLastName(profile.getLastName());
         dto.setAge(profile.getAge());
+        dto.setGender(profile.getGender());
         dto.setAimScore(profile.getAimScore());
         dto.setPhoto(profile.getPhoto());
         dto.setPlayedGames(profile.getPlayedGames());
@@ -70,7 +71,7 @@ public class ProfileService {
             profile.setPhoto(photo);
             profileRepository.save(profile);
         } else {
-            throw new UsernameNotFoundException("Gebruiker met gebruikersnaam " + username + " niet gevonden");
+            throw new UsernameNotFoundException("Gebruiker: " + username + " niet gevonden");
         }
     }
 }

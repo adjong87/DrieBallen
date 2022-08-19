@@ -1,5 +1,8 @@
 package nl.drieballen.drieballen.payload.request;
 
+import nl.drieballen.drieballen.models.Gender;
+
+import java.time.LocalDate;
 import java.util.Set;
 import javax.validation.constraints.*;
 
@@ -28,8 +31,9 @@ public class SignupRequest {
     private String lastName;
 
     @NotNull
-    private int age;
+    private LocalDate dob;
 
+    private Gender gender;
     @NotNull
     private int aimScore;
 
@@ -73,9 +77,6 @@ public class SignupRequest {
         return lastName;
     }
 
-    public int getAge() {
-        return age;
-    }
 
     public int getAimScore() {
         return aimScore;
@@ -89,11 +90,23 @@ public class SignupRequest {
         this.lastName = lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public void setAimScore(int aimScore) {
         this.aimScore = aimScore;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

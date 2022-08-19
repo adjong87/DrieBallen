@@ -36,8 +36,8 @@ INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, fille
 INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (76, 25, 38, 0.80, 1.5,true,'2022-07-01',2,3,20,'Dikkie','Pieter', 9, 8);
 INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (77, 44, 25, 1.3, 1.00,true,'2022-07-01',8,5,25,'Jan','Dikkie', 12, 0);
 
-INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (78, 44, 38, 1.22, 2,false,'2022-07-02',3,2,0,'Dick','Pieter', 41, 38);
-INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (79, 38, 44, 1.00, 1.46,false,'2022-07-02',4,5,0,'Jan','Dick', 38, 44);
+INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (78, 44, 38, 0, 0,false,'2022-07-02',0,0,0,'Dick','Pieter', 44, 38);
+INSERT INTO score_card(id, aim_scorep1, aim_scorep2, averagep1, averagep2, filled_in, gespeeld_op, highest_seriep1, highest_seriep2, nr_of_turns, player_one_name, player_two_name, remainderp1, remainderp2) VALUES (79, 38, 44, 0, 0,false,'2022-07-02',0,0,0,'Jan','Dick', 38, 44);
 
 INSERT INTO played_game(scorecard_id, profile_username, uitgespeeld) VALUES (78, 'dickjaspers', false);
 INSERT INTO played_game(scorecard_id, profile_username, uitgespeeld) VALUES (78, 'pieterpost', true);

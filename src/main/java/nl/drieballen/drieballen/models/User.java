@@ -1,6 +1,8 @@
 package nl.drieballen.drieballen.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import nl.drieballen.drieballen.payload.request.SignupRequest;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -37,17 +39,16 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
         private Set<Role> roles = new HashSet<>();
 
-        @JsonIgnore
         @OneToOne
         @JoinColumn(name="user_profile")
         private Profile profile;
 
-        public User(String username, String email, String password) {
-                this.username = username;
-                this.email = email;
-                this.password = password;
+        public User (SignupRequest request) {
+                username = request.getUsername();
+                email = request.getEmail();
+                password = request.getPassword();
+                profile = new Profile(request.getUsername(), request.getFirstName(), request.getLastName(), request.getDob(), request.getAimScore()), request.getGender();
         }
-
         public User() {
         }
 

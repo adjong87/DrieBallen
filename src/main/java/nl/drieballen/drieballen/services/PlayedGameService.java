@@ -22,7 +22,9 @@ public class PlayedGameService {
 
     private final PlayedGameRepository playedGameRepository;
 
-    public PlayedGameService(ProfileRepository profileRepository, ScoreCardRepository scoreCardRepository, PlayedGameRepository playedGameRepository) {
+    public PlayedGameService(ProfileRepository profileRepository,
+                             ScoreCardRepository scoreCardRepository,
+                             PlayedGameRepository playedGameRepository) {
         this.profileRepository = profileRepository;
         this.scoreCardRepository = scoreCardRepository;
         this.playedGameRepository = playedGameRepository;
@@ -37,6 +39,7 @@ public class PlayedGameService {
         }
         return playedGameDtoList;
     }
+
 
     public List<PlayedGameDto> findPlayedGamesByScoreCardId(Long id) {
         List<PlayedGameDto> playedGameDtoList = new ArrayList<>();

@@ -1,6 +1,9 @@
 package nl.drieballen.drieballen.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
 import javax.persistence.*;
 
@@ -16,8 +19,6 @@ public class Profile {
 
     private String lastName;
 
-    private int age;
-
     private int aimScore;
 
     @OneToOne
@@ -27,12 +28,33 @@ public class Profile {
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private Collection<PlayedGame> playedGames;
 
-    public Profile(String username, String firstName, String lastName, int age, int aimScore) {
+    private LocalDate dob;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    private int age;
+
+    public Profile(String username,
+                   String firstName,
+                   String lastName,
+                   LocalDate dob,
+                   int aimScore, Gender gender) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.dob = dob;
         this.aimScore = aimScore;
+        this.age = Period.between(dob, LocalDate.now()).getYears();
+        this.gender = gender;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public Profile() {
@@ -62,7 +84,6 @@ public class Profile {
         return photo;
     }
 
-    @OneToMany
     public Collection<PlayedGame> getPlayedGames() {
         return playedGames;
     }
@@ -95,9 +116,16 @@ public class Profile {
         this.playedGames = playedGames;
     }
 
-    public void addPlayedGame(PlayedGame playedGame){
+    public void addPlayedGame(PlayedGame playedGame) {
         playedGames.add(playedGame);
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }
 

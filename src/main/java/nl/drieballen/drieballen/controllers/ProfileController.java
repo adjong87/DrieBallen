@@ -30,9 +30,8 @@ public class ProfileController {
     @GetMapping(value = "/profile")
     public ResponseEntity<ProfileDto> getProfile(@RequestParam("username") String username) {
         ProfileDto optionalProfile = profileService.getProfile(username);
-        if(optionalProfile != null) {
+        if (optionalProfile != null) {
             return ResponseEntity.ok().body(optionalProfile);
-
         } else {
             throw new UsernameNotFoundException("Gebruiker met gebruikersnaam " + username + " niet gevonden");
         }
